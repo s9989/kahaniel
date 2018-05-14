@@ -3,12 +3,19 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\InvoiceRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\DocumentRepository")
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  */
-class Invoice
+class Document
 {
+    const PROFIT_TYPE = 1;
+    const COST_TYPE = 2;
+
+    use SoftDeleteable;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -21,6 +28,24 @@ class Invoice
      * @var integer
      */
     private $type;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @var integer
+     */
+    private $category;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=false)
+     * @var string
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @var string
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=false)
@@ -36,14 +61,14 @@ class Invoice
 
     /**
      * @ORM\ManyToOne(targetEntity="Company")
-     * @ORM\JoinColumn(name="buyer_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="buyer_id", referencedColumnName="id", nullable=true)
      * @var Company
      */
     private $buyer;
 
     /**
      * @ORM\ManyToOne(targetEntity="Company")
-     * @ORM\JoinColumn(name="seller_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="seller_id", referencedColumnName="id", nullable=true)
      * @var Company
      */
     private $seller;
@@ -67,16 +92,35 @@ class Invoice
     private $place;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=false)
      * @var integer
      */
     private $net;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", name="tax_percent", nullable=false)
+     * @var integer
+     */
+    private $taxPercent;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @var integer
+     */
+    private $tax;
+
+    /**
+     * @ORM\Column(type="integer", nullable=false)
      * @var integer
      */
     private $gross;
+
+    public function __construct()
+    {
+        $this->issueDate = new \DateTime();
+        $this->paymentDate = new \DateTime();
+        $this->description = '';
+    }
 
     /**
      * @return mixed
@@ -88,7 +132,7 @@ class Invoice
 
     /**
      * @param mixed $id
-     * @return Invoice
+     * @return Document
      */
     public function setId($id)
     {
@@ -106,11 +150,65 @@ class Invoice
 
     /**
      * @param int $type
-     * @return Invoice
+     * @return Document
      */
-    public function setType(int $type): Invoice
+    public function setType(int $type): Document
     {
         $this->type = $type;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCategory(): ?int
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param int $category
+     * @return Document
+     */
+    public function setCategory(int $category): Document
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @param string $title
+     * @return Document
+     */
+    public function setTitle(string $title): Document
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Document
+     */
+    public function setDescription(string $description = null): Document
+    {
+        $this->description = $description;
         return $this;
     }
 
@@ -124,9 +222,9 @@ class Invoice
 
     /**
      * @param string $number
-     * @return Invoice
+     * @return Document
      */
-    public function setNumber(string $number): Invoice
+    public function setNumber(string $number): Document
     {
         $this->number = $number;
         return $this;
@@ -142,9 +240,9 @@ class Invoice
 
     /**
      * @param string $accountNumber
-     * @return Invoice
+     * @return Document
      */
-    public function setAccountNumber(string $accountNumber): Invoice
+    public function setAccountNumber(string $accountNumber): Document
     {
         $this->accountNumber = $accountNumber;
         return $this;
@@ -160,9 +258,9 @@ class Invoice
 
     /**
      * @param Company $buyer
-     * @return Invoice
+     * @return Document
      */
-    public function setBuyer(Company $buyer): Invoice
+    public function setBuyer(Company $buyer): Document
     {
         $this->buyer = $buyer;
         return $this;
@@ -178,9 +276,9 @@ class Invoice
 
     /**
      * @param Company $seller
-     * @return Invoice
+     * @return Document
      */
-    public function setSeller(Company $seller): Invoice
+    public function setSeller(Company $seller): Document
     {
         $this->seller = $seller;
         return $this;
@@ -196,9 +294,9 @@ class Invoice
 
     /**
      * @param \DateTime $issueDate
-     * @return Invoice
+     * @return Document
      */
-    public function setIssueDate(\DateTime $issueDate): Invoice
+    public function setIssueDate(\DateTime $issueDate): Document
     {
         $this->issueDate = $issueDate;
         return $this;
@@ -214,9 +312,9 @@ class Invoice
 
     /**
      * @param \DateTime $paymentDate
-     * @return Invoice
+     * @return Document
      */
-    public function setPaymentDate(\DateTime $paymentDate): Invoice
+    public function setPaymentDate(\DateTime $paymentDate): Document
     {
         $this->paymentDate = $paymentDate;
         return $this;
@@ -232,9 +330,9 @@ class Invoice
 
     /**
      * @param string $place
-     * @return Invoice
+     * @return Document
      */
-    public function setPlace(string $place): Invoice
+    public function setPlace(string $place): Document
     {
         $this->place = $place;
         return $this;
@@ -250,11 +348,47 @@ class Invoice
 
     /**
      * @param int $net
-     * @return Invoice
+     * @return Document
      */
-    public function setNet(int $net): Invoice
+    public function setNet(int $net): Document
     {
         $this->net = $net;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTaxPercent(): ?int
+    {
+        return $this->taxPercent;
+    }
+
+    /**
+     * @param int $taxPercent
+     * @return Document
+     */
+    public function setTaxPercent(int $taxPercent): Document
+    {
+        $this->taxPercent = $taxPercent;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTax(): ?int
+    {
+        return $this->tax;
+    }
+
+    /**
+     * @param int $tax
+     * @return Document
+     */
+    public function setTax(int $tax): Document
+    {
+        $this->tax = $tax;
         return $this;
     }
 
@@ -268,9 +402,9 @@ class Invoice
 
     /**
      * @param int $gross
-     * @return Invoice
+     * @return Document
      */
-    public function setGross(int $gross): Invoice
+    public function setGross(int $gross): Document
     {
         $this->gross = $gross;
         return $this;

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Firmy{% endblock %}
+
+{% block body %}
+    <section>
+    {% for company in companies %}
+        <div class="anchor">
+            <div class="menu">
+                <a href="{{ path('edit_company', {'id': company.id}) }}"><i class="material-icons">edit</i></a>
+                <a href="{{ path('delete_company', {'id': company.id}) }}"><i class="material-icons">delete</i></a>
+            </div>
+            <a href="">{{ company.name }}</a>
+        </div>
+    {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block current %}
+    {% if type is defined %}
+        {% if type == 0 %}
+            Zyski
+        {% else %}
+            Koszta
+        {% endif %}
+    {% endif %}
+{% endblock %}

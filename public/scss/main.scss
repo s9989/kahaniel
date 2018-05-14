@@ -1,0 +1,254 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+ul, li {
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #222;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    padding: 0;
+    margin: 0;
+}
+
+h1 { margin-bottom: 15px; }
+h2 { margin-bottom: 10px; }
+h3 { margin-bottom: 7px; }
+h4 { margin-bottom: 5px; }
+
+body {
+    background-color: #f2f2f2;
+
+    &.empty {
+        background: #7babf7 url('../img/background.jpg') fixed no-repeat center center;
+    }
+}
+
+body > .header {
+    background-color: #4285f4;
+    min-height: 50px;
+    box-shadow: #313131 0 0 10px;
+    margin-bottom: 20px;
+
+    & > .lefty {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 500;
+        color: white;
+        line-height: 24px;
+
+        & > .menu-icon {
+            display: block;
+            cursor: pointer;
+            float: left;
+            margin-right: 16px;
+        }
+    }
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.lefty {
+    position: absolute;
+    padding: 13px;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content > .lefty {
+    padding: 0 13px;
+    background-color: #f2f2f2;
+}
+
+.content > .lefty > .menu {
+    min-width: 216px;
+
+    & > li {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        font-size: 14px;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:hover, &.active {
+            background-color: #ddd;
+        }
+
+        & > a {
+            color: black;
+            line-height: 40px;
+            padding: 0 12px 0 16px;
+            display: block;
+
+            span {
+                padding-left: 24px;
+            }
+
+            & > .material-icons {
+                vertical-align: middle;
+            }
+        }
+    }
+}
+
+.content section {
+    background-color: white;
+    box-shadow: #ddd 0 2px 5px;
+    margin: 0 13px;
+
+    & > div:not(.anchor) {
+        padding: 20px;
+    }
+
+    & > div.anchor {
+
+        & > a {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 24px;
+
+            display: block;
+            padding: 20px;
+        }
+
+        &:not(:first-child) {
+            border-top: solid 1px #ddd;
+        }
+
+        & > .menu {
+            float: right;
+            display: none;
+            padding: 20px;
+
+            a {
+                display: block;
+                float: left;
+                margin-left: 10px;
+
+                .material-icons {
+                    color: #bdbdbd;
+
+                }
+            }
+        }
+
+        &:hover > .menu {
+            display: block;
+        }
+    }
+}
+
+.material-icons {
+    &.white {
+        color: white;
+    }
+    &.green {
+        color: #58a200;
+    }
+    &.red {
+        color: #d8382a;
+    }
+    &.gray {
+        color: #a5a5a5;
+    }
+}
+
+.material-icons.rtl {
+    -moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
+}
+
+div.fieldset {
+
+    .label {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: #666;
+    }
+
+    .value {
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+    }
+}
+
+.document.element {
+
+    .date {
+        color: #999999;
+        margin-right: 16px;
+    }
+
+}
+
+.new {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    a {
+        padding: 10px;
+        background-color: #d23f31;
+        display: block;
+        border-radius: 50%;
+
+        i {
+            display: block;
+            color: white;
+        }
+    }
+}
+
+
+form > div > div {
+    padding: 5px 10px;
+
+    & > label {
+        display: block;
+        float: left;
+        width: 25%;
+
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+        color: #666;
+    }
+
+    & > div, & > input {
+        display: block;
+        float: left;
+        width: 65%;
+    }
+
+    input[type="text"],
+    input[type="number"]
+    {
+        padding: 4px;
+    }
+}

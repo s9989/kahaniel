@@ -2,11 +2,37 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}kahaniel{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
+        <link rel="stylesheet" href="/css/clearfix.css">
+        <link rel="stylesheet" href="{{ url('scss/main') }}">
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="{% block body_class %}{% endblock %}">
+        <div class="header">
+            <div class="lefty">
+                <i class="material-icons white menu-icon">menu</i>
+                {% block current %}{% endblock %}
+            </div>
+            <div class="wrapper">
+                {# search #}
+            </div>
+        </div>
+        <div class="content">
+            <div class="lefty">
+                <ul class="menu">
+                    <li><a href="{{ url('profit_documents') }}"><i class="material-icons green">show_chart</i><span>Zyski</span></a></li>
+                    <li><a href="{{ url('cost_documents') }}"><i class="material-icons rtl red">show_chart</i><span>Koszta</span></a></li>
+                    <li><a href="{{ url('companies') }}"><i class="material-icons">person</i><span>Kontrahenci</span></a></li>
+                    <li><a href=""><i class="material-icons gray">event_note</i><span>Raport</span></a></li>
+                </ul>
+            </div>
+            <div class="wrapper">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        {% block submenu %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

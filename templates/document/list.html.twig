@@ -1,0 +1,27 @@
+{% extends 'document/base.html.twig' %}
+
+{% block title %}Documents{% endblock %}
+
+{% block body_class %}{% if documents|length == 0 %}empty{% endif %}{% endblock %}
+
+{% block body %}
+    <section>
+    {% for document in documents %}
+        <div class="anchor document element">
+            <div class="menu">
+                <a href="{{ path('edit_document', {'id': document.id}) }}"><i class="material-icons">edit</i></a>
+                <a href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
+            </div>
+            <a href="{{ path('show_document', {'id': document.id}) }}">
+                <span class="date">{{ document.issueDate|date('d.m.Y') }}</span>{{ document.title }}<span class="value right">{{ document.gross|price }}</span>
+            </a>
+        </div>
+    {% endfor %}
+    </section>
+{% endblock %}
+
+{% block submenu %}
+    <div class="new">
+        <a href="{{ path('new_document') }}"><i class="material-icons">add</i></a>
+    </div>
+{% endblock %}

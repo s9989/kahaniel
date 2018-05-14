@@ -1,0 +1,70 @@
+{% extends 'document/base.html.twig' %}
+
+{% block title %}{{ document.title }}{% endblock %}
+
+{% block body %}
+<section>
+    <div>
+        <div class="cf fieldset">
+            <div class="left label">Tytuł</div>
+            <div class="right value">{{ document.title }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Typ</div>
+            <div class="right value">{{ document.type }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Kategoria</div>
+            <div class="right value">{{ document.category }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Opis</div>
+            <div class="right value">{{ document.description }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Numer</div>
+            <div class="right value">{{ document.number }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Numer konta</div>
+            <div class="right value">{{ document.accountNumber }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Kupujący</div>
+            <div class="right value">{{ document.buyer }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Sprzedający</div>
+            <div class="right value">{{ document.seller }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Data wystawienia</div>
+            <div class="right value">{{ document.issueDate|date('d.m.Y') }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Data płatności</div>
+            <div class="right value">{{ document.paymentDate|date('d.m.Y') }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Miejsce</div>
+            <div class="right value">{{ document.place }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Netto</div>
+            <div class="right value">{{ document.net }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Procent podatku</div>
+            <div class="right value">{{ document.taxPercent }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Podatek</div>
+            <div class="right value">{{ document.tax }}</div>
+        </div>
+        <div class="cf fieldset">
+            <div class="left label">Brutto</div>
+            <div class="right value">{{ document.gross }}</div>
+        </div>
+    </div>
+</section>
+{% endblock %}

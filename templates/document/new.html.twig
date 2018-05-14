@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% form_theme form _self %}
+
+{% block form_row %}
+    <div class="cf">
+        {{ form_label(form) }}
+        {{ form_errors(form) }}
+        {{ form_widget(form) }}
+    </div>
+{% endblock form_row %}
+
+{% block title %}New document{% endblock %}
+
+{% block body %}
+<section>
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+</section>
+{% endblock %}
