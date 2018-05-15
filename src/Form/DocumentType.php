@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Document;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,8 +20,8 @@ class DocumentType extends AbstractType
             ->add('description', null, ['label' => 'Opis'])
             ->add('number', null, ['label' => 'Numer'])
             ->add('accountNumber', null, ['label' => 'Numer konta'])
-            ->add('issueDate', null, ['label' => 'Data wystawienia'])
-            ->add('paymentDate', null, ['label' => 'Data płatności'])
+            ->add('issueDate', DateType::class, ['label' => 'Data wystawienia', 'attr' => ['class' => 'js-datepicker'], 'widget' => 'single_text', 'html5' => false])
+            ->add('paymentDate', DateType::class, ['label' => 'Data płatności', 'attr' => ['class' => 'js-datepicker'], 'widget' => 'single_text', 'html5' => false])
             ->add('place', null, ['label' => 'Miejsce'])
             ->add('net', null, ['label' => 'Netto'])
             ->add('taxPercent', null, ['label' => 'Podatek(%)'])

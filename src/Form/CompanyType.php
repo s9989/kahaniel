@@ -13,19 +13,18 @@ class CompanyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nip')
-            ->add('name')
-            ->add('firstName')
-            ->add('lastName')
-            ->add('street')
-            ->add('houseNumber')
-            ->add('apartamentNumber')
-            ->add('city')
-            ->add('postCode')
-            ->add('email')
-            ->add('phone')
-            ->add('main')
-            ->add('save', SubmitType::class)
+            ->add('nip', null, ['label' => 'NIP'])
+            ->add('name', null, ['label' => 'Nazwa'])
+            ->add('firstName', null, ['label' => 'Imię'])
+            ->add('lastName', null, ['label' => 'Nazwisko'])
+            ->add('street', null, ['label' => 'Ulica'])
+            ->add('houseNumber', null, ['label' => 'Numer domu'])
+            ->add('apartamentNumber', null, ['label' => 'Numer mieszkania'])
+            ->add('postCode', null, ['label' => 'Kod pocztowy'])
+            ->add('city', null, ['label' => 'Miasto'])
+            ->add('email', null, ['label' => 'Email'])
+            ->add('phone', null, ['label' => 'Telefon'])
+            ->add('save', SubmitType::class, ['label' => 'Zapisz'])
         ;
     }
 

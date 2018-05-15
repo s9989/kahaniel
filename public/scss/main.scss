@@ -226,29 +226,46 @@ div.fieldset {
     }
 }
 
+form {
 
-form > div > div {
-    padding: 5px 10px;
+    padding: 20px;
 
-    & > label {
-        display: block;
-        float: left;
-        width: 25%;
+    & > div > div {
+        position: relative;
+        height: 49px;
+        margin-bottom: 10px;
 
-        font-family: 'Roboto', sans-serif;
-        font-weight: 300;
-        color: #666;
-    }
+        & > label {
+            display: block;
 
-    & > div, & > input {
-        display: block;
-        float: left;
-        width: 65%;
-    }
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            color: #666;
+            font-size: 12px;
+            padding: 2px 0;
+        }
 
-    input[type="text"],
-    input[type="number"]
-    {
-        padding: 4px;
+        & > div, & > input, & > select {
+            width: 98%;
+            padding: 4px 1%;
+
+            position: absolute;
+            left: 0;
+            right: 0;
+            font-family: 'Roboto', sans-serif;
+            font-weight: 300;
+            font-size: 16px;
+        }
+
+        & > select {
+            width: 100%;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            //padding: 4px;
+            border: solid 1px #ddd;
+        }
     }
 }
