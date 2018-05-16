@@ -18,4 +18,18 @@ class DocumentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Document::class);
     }
+
+    /**
+     * @param Document[] $collection
+     */
+    public static function groupByMonth(array $collection)
+    {
+        $grouped = [];
+        foreach ($collection as $document) {
+            $date = $document->getIssueDate();
+            $m = $date->format('F, Y');
+            $grouped[$m][] = $document;
+        }
+        return $grouped;
+    }
 }

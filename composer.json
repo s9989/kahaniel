@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.2.4",
         "ext-iconv": "*",
         "gedmo/doctrine-extensions": "^2.4",
         "leafo/scssphp": "^0.7.5",

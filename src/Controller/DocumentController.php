@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Document;
 use App\Form\DocumentType;
+use App\Repository\DocumentRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,12 +16,35 @@ class DocumentController extends Controller
 {
     /**
      * @param Request $request
-     * @Route("/document/new", name="new_document")
+     * @Route("/document/new/profit", name="new_profit")
      * @return RedirectResponse|Response
      */
-    public function new(Request $request)
+    public function newProfit(Request $request)
     {
-        $form = $this->createForm(DocumentType::class, new Document());
+        return $this->new($request, Document::PROFIT_TYPE);
+    }
+
+    /**
+     * @param Request $request
+     * @Route("/document/new/cost", name="new_cost")
+     * @return RedirectResponse|Response
+     */
+    public function newCost(Request $request)
+    {
+        return $this->new($request, Document::COST_TYPE);
+    }
+
+    /**
+     * @param Request $request
+     * @param $type
+     *
+     * @return RedirectResponse|Response
+     */
+    private function new(Request $request, $type)
+    {
+        $document = new Document();
+        $document->setType($type);
+        $form = $this->createForm(DocumentType::class, $document);
 
         $form->handleRequest($request);
 
@@ -32,7 +56,7 @@ class DocumentController extends Controller
             $entityManager->persist($document);
             $entityManager->flush();
 
-            return $this->redirectToRoute($document->getType() == Document::PROFIT_TYPE ? 'profit_documents' : 'cost_documents');
+            return $this->redirectToRoute($type == Document::PROFIT_TYPE ? 'profit_documents' : 'cost_documents');
         }
 
         return $this->render('document/new.html.twig', [
@@ -119,13 +143,13 @@ class DocumentController extends Controller
         $documents = $entityManager->getRepository(Document::class)->findBy(['type' => $type]);
 
         return $this->render('document/list.html.twig', [
-            'documents' => $documents,
+            'collection' => DocumentRepository::groupByMonth($documents),
             'type' => $type,
         ]);
     }
 
     /**
-     * @Route("/document/list_profits", name="profit_documents")
+     * @Route("/document/list/profits", name="profit_documents")
      * @return Response
      */
     public function listProfits()
@@ -134,7 +158,7 @@ class DocumentController extends Controller
     }
 
     /**
-     * @Route("/document/list_costs", name="cost_documents")
+     * @Route("/document/list/costs", name="cost_documents")
      * @return Response
      */
     public function listCosts()
