@@ -22,10 +22,11 @@
         <div class="content">
             <div class="lefty">
                 <ul class="menu">
-                    <li><a href="{{ url('profit_documents') }}"><i class="material-icons green">show_chart</i><span>Zyski</span></a></li>
-                    <li><a href="{{ url('cost_documents') }}"><i class="material-icons rtl red">show_chart</i><span>Koszta</span></a></li>
-                    <li><a href="{{ url('companies') }}"><i class="material-icons">person</i><span>Kontrahenci</span></a></li>
-                    <li><a href=""><i class="material-icons gray">event_note</i><span>Raport</span></a></li>
+                    <li class="profits"><a href="{{ url('profit_documents') }}"><i class="material-icons">show_chart</i><span>Zyski</span></a></li>
+                    <li class="costs"><a href="{{ url('cost_documents') }}"><i class="material-icons rtl">show_chart</i><span>Koszta</span></a></li>
+                    <li class="insurance"><a href="{{ url('social_insurance') }}"><i class="material-icons">account_circle</i><span>ZUS</span></a></li>
+                    <li class="companies"><a href="{{ url('companies') }}"><i class="material-icons">person</i><span>Kontrahenci</span></a></li>
+                    <li class="report"><a href=""><i class="material-icons">event_note</i><span>Raport</span></a></li>
                 </ul>
             </div>
             <div class="wrapper">

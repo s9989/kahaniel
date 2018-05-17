@@ -50,11 +50,17 @@ class User implements UserInterface, \Serializable
     private $discount;
 
     /**
-     * @var integer
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    private $sicknessPayer;
+
+    /**
+     * @var Company
      * @ORM\OneToOne(targetEntity="Company")
      * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
-    private $companyId;
+    private $company;
 
     /**
      * @var boolean
@@ -192,20 +198,20 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return int
+     * @return Company
      */
-    public function getCompanyId(): int
+    public function getCompany(): Company
     {
-        return $this->companyId;
+        return $this->company;
     }
 
     /**
-     * @param int $companyId
+     * @param Company $company
      * @return User
      */
-    public function setCompanyId(int $companyId): User
+    public function setCompany(Company $company): User
     {
-        $this->companyId = $companyId;
+        $this->company = $company;
         return $this;
     }
 
@@ -244,6 +250,24 @@ class User implements UserInterface, \Serializable
     public function setPassword(string $password): User
     {
         $this->password = $password;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSicknessPayer(): bool
+    {
+        return $this->sicknessPayer;
+    }
+
+    /**
+     * @param bool $sicknessPayer
+     * @return User
+     */
+    public function setSicknessPayer(bool $sicknessPayer): User
+    {
+        $this->sicknessPayer = $sicknessPayer;
         return $this;
     }
 }

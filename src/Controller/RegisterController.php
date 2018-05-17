@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,7 +25,14 @@ class RegisterController extends Controller
             $user->setEmail($request->get('email', 'admin@example.local'));
             $user->setUsername($request->get('username', 'admin'));
             $user->setDiscount($request->get('discount', true));
-            $user->setStartDate($request->get('start_date', null));
+            $user->setSicknessPayer($request->get('sickness_payer', true));
+
+            $startDate = $request->get('start_date', null);
+            if ($startDate) {
+                $startDate = new \DateTime($startDate);
+            }
+
+            $user->setStartDate($startDate);
 
             $password = $request->get('password', 'admin');
             $password = $encoder->encodePassword($user, $password);

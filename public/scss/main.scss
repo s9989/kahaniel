@@ -111,6 +111,21 @@ body > .header {
                 vertical-align: middle;
             }
         }
+        &.profits .material-icons {
+            color: #58a200;
+        }
+        &.costs .material-icons {
+            color: #d8382a;
+        }
+        &.insurance .material-icons {
+            color: #f3aa01;
+        }
+        &.companies .material-icons {
+            color: black;
+        }
+        &.report .material-icons {
+            color: #1454a9;
+        }
     }
 }
 
@@ -125,6 +140,10 @@ body > .header {
     background-color: white;
     box-shadow: #ddd 0 2px 5px;
     margin: 0 13px;
+
+    &.last {
+        margin-bottom: 20px;
+    }
 
     & > div:not(.anchor) {
         padding: 20px;
@@ -172,15 +191,6 @@ body > .header {
 .material-icons {
     &.white {
         color: white;
-    }
-    &.green {
-        color: #58a200;
-    }
-    &.red {
-        color: #d8382a;
-    }
-    &.gray {
-        color: #a5a5a5;
     }
 }
 

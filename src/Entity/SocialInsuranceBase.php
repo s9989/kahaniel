@@ -107,6 +107,16 @@ class SocialInsuranceBase
         return $this->month;
     }
 
+    public function getDate(): \DateTime
+    {
+        return new \DateTime("{$this->getYear()}-{$this->getMonth()}-01");
+    }
+
+    public function getFullMonth(): string
+    {
+        return $this->getDate()->format('F, Y');
+    }
+
     /**
      * @param int $month
      * @return SocialInsuranceBase

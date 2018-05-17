@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+{% block title %}Social Insurance{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>src/Controller/SocialInsuranceController.php</code></li>
-        <li>Your template at <code>templates/social_insurance/index.html.twig</code></li>
-    </ul>
-</div>
+    {% for base in bases %}
+        <div class="caption">{{ base.fullMonth }}</div>
+        <section class="last">
+                <div class="anchor social_insurance element">
+                    <div class="menu">
+                        <a href="{{ path('social_insurance_change', {'id': base.id, 'action': 'pay'}) }}"><i class="material-icons">edit</i></a>
+                        <a href="{{ path('social_insurance_change', {'id': base.id, 'action': 'undo_payment'}) }}"><i class="material-icons">delete</i></a>
+                    </div>
+                    <a href="#">
+                        <span class="date">{{ base.minimalSalary|price  }}</span>{{ base.averageSalary|price  }}<span class="value right"></span>
+                    </a>
+                </div>
+        </section>
+    {% endfor %}
 {% endblock %}
