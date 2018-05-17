@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}kahaniel{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
+        <link rel="stylesheet" href="/css/clearfix.css">
+        <link rel="stylesheet" href="{{ url('scss/main') }}">
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+        <div class="content">
+            <div class="wrapper">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        {% block submenu %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>
