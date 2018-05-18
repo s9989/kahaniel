@@ -30,6 +30,7 @@ h3 { margin-bottom: 7px; }
 h4 { margin-bottom: 5px; }
 
 body {
+    padding-top: 50px;
     background-color: #f2f2f2;
 
     &.empty {
@@ -37,11 +38,14 @@ body {
     }
 }
 
-body > .header {
+.header {
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
     background-color: #4285f4;
     min-height: 50px;
     box-shadow: #313131 0 0 10px;
-    margin-bottom: 20px;
 
     & > .lefty {
         font-family: 'Roboto', sans-serif;
@@ -66,9 +70,18 @@ body > .header {
     float: right;
 }
 
-.lefty {
+.lefty, .righty {
     position: absolute;
-    padding: 13px;
+}
+
+.righty {
+    right: 0;
+}
+
+.header {
+    .lefty, .righty {
+        padding: 13px;
+    }
 }
 
 .wrapper {
@@ -76,13 +89,35 @@ body > .header {
     margin: 0 auto;
 }
 
+.content > .wrapper {
+    padding-top: 20px;
+
+    transition: padding-left 0.2s ease-out;
+    padding-left: 0;
+
+
+    &.collapsed {
+        @media screen and (min-width: 622px) {
+            padding-left: 242px;
+        }
+    }
+}
+
 .content > .lefty {
-    padding: 0 13px;
     background-color: #f2f2f2;
 }
 
 .content > .lefty > .menu {
+
+    margin: 0 13px;
     min-width: 216px;
+
+    transition: margin-left 0.2s ease-out;
+    margin-left: -242px;
+
+    &.expanded {
+        margin-left: 0;
+    }
 
     & > li {
         font-family: 'Roboto', sans-serif;
@@ -284,5 +319,56 @@ form {
             //padding: 4px;
             border: solid 1px #ddd;
         }
+    }
+}
+
+form.login {
+    padding: 0;
+    border: none;
+    position: absolute;
+    top: 50%;
+    margin: -73px 0 0 -300px;
+    left: 50%;
+    width: 600px;
+
+    text-align: center;
+
+    input {
+        text-align: center;
+        width: 50%;
+        max-width: 500px;
+        border: none;
+        margin: 0 auto;
+        font-family: 'Roboto', sans-serif;
+        padding: 10px;
+        //margin-left: -5px;
+        font-weight: 300;
+        font-size: 18px;
+        margin-bottom: 10px;
+
+        &[type="submit"] {
+            margin-bottom: 0;
+            background-color: white;
+            filter:opacity(70%);
+            font-weight: 500;
+        }
+    }
+    &.enter {
+        display: none;
+    }
+}
+
+div.login_bg {
+    filter: blur(5px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/login.jpg') fixed no-repeat center center;
+    background-size: cover;
+
+    &.enter {
+        filter: none;
     }
 }

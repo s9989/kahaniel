@@ -53,6 +53,19 @@ class Version20180517134251 extends AbstractMigration
         $this->addSql('INSERT INTO social_insurance_base (year, month, minimal_salary, average_salary, other_percent, retirement_percent, sickness_percent, accident_percent, health_percent) VALUES (2018, 10, 210000, 473991, 800, 1952, 245, 167, 900)');
         $this->addSql('INSERT INTO social_insurance_base (year, month, minimal_salary, average_salary, other_percent, retirement_percent, sickness_percent, accident_percent, health_percent) VALUES (2018, 11, 210000, 473991, 800, 1952, 245, 167, 900)');
         $this->addSql('INSERT INTO social_insurance_base (year, month, minimal_salary, average_salary, other_percent, retirement_percent, sickness_percent, accident_percent, health_percent) VALUES (2018, 12, 210000, 473991, 800, 1952, 245, 167, 900)');
+
+
+        /**
+         * minimal:
+         * http://prawo.sejm.gov.pl/isap.nsf/search.xsp
+         * query: "w sprawie wysokości minimalnego wynagrodzenia"
+         * example: http://prawo.sejm.gov.pl/isap.nsf/DocDetails.xsp?id=WDU20170001747
+         *
+         * average:
+         * http://prawo.sejm.gov.pl/isap.nsf/search.xsp
+         * query: "w sprawie przeciętnego miesięcznego wynagrodzenia w sektorze przedsiębiorstw, włącznie z wypłatami z zysku"
+         * example: http://prawo.sejm.gov.pl/isap.nsf/download.xsp/WMP20180000128/O/M20180128.pdf
+         */
     }
 
     public function down(Schema $schema)

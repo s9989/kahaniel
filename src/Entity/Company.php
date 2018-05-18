@@ -89,6 +89,11 @@ class Company
      */
     private $main;
 
+    public function __construct()
+    {
+        $this->main = false;
+    }
+
     public function __toString()
     {
         return $this->getName();
