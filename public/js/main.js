@@ -1,12 +1,15 @@
 $(document).ready(function () {
+
+    $('.js-datepicker').pickadate({
+        format: 'yyyy-mm-dd'
+    });
+
     $('.menu-icon').on('click', function() {
         $('.content > .wrapper').toggleClass('collapsed');
         $('.menu').toggleClass('expanded');
     });
 
     var myElement = $('html')[0];
-
-    console.log(myElement);
 
     let hammertime = new Hammer(myElement);
     // hammertime.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
