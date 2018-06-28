@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reports{% endblock %}
+
+{% block body %}
+    {% for report in reports %}
+        <div class="caption">{{ report.fullMonth }}</div>
+        <section class="last">
+                <div class="anchor social_insurance element">
+                    <div class="menu">
+                    </div>
+                    <a href="#">
+                        {% if report.profits is defined %}
+                        <span class="date">{{ report.profits|length }}</span> {{ report.profits_gross|price }}<span class="value right"></span>
+                        {% endif %}
+                        <br>
+                        {% if report.costs is defined %}
+                        <span class="date">{{ report.costs|length }}</span> {{ report.costs_gross|price }}<span class="value right"></span>
+                        {% endif %}
+                    </a>
+                </div>
+        </section>
+    {% endfor %}
+{% endblock %}
