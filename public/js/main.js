@@ -31,10 +31,12 @@ $(document).ready(function () {
             $('.content > .wrapper').removeClass('collapsed');
             $('.menu').removeClass('expanded');
         }
-        
+
     });
 
     hammertime.on('doubletap', function(event) {
+
+        console.log(event.changedPointers.length);
 
         if(myElement.requestFullScreen) {
             myElement.requestFullScreen();
