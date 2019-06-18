@@ -38,12 +38,14 @@ $(document).ready(function () {
 
         alert(event.changedPointers.length);
 
-        if(myElement.requestFullScreen) {
-            myElement.requestFullScreen();
-        } else if(myElement.mozRequestFullScreen) {
-            myElement.mozRequestFullScreen();
-        } else if(myElement.webkitRequestFullScreen) {
-            myElement.webkitRequestFullScreen();
+        var elem = document.querySelector('#body');
+
+        if(elem.requestFullScreen) {
+            elem.requestFullScreen();
+        } else if(elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if(elem.webkitRequestFullScreen) {
+            elem.webkitRequestFullScreen();
         }
 
     });
