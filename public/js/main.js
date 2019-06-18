@@ -12,8 +12,9 @@ $(document).ready(function () {
     var myElement = $('html')[0];
 
     let hammertime = new Hammer(myElement);
+    hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
     // hammertime.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-    hammertime.on('swiperight swipeleft pan', function(event) {
+    hammertime.on('swiperight swipeleft panstart', function(event) {
 
         if (event.type == 'swiperight') {
             $('.content > .wrapper').addClass('collapsed');
@@ -25,9 +26,9 @@ $(document).ready(function () {
             $('.menu').removeClass('expanded');
         }
 
-        if (event.type == 'panup') {
+        if (event.type == 'panstart') {
 
-            if (event.changedPointers.length != 2) {
+            if (event.changedPointers.length != 2 || event.direction != Hammer.DIRECTION_UP) {
                 return;
             }
 
