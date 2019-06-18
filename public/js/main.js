@@ -14,10 +14,10 @@ $(document).ready(function () {
     let hammertime = new Hammer.Manager(myElement);
 
     hammertime.add( new Hammer.Swipe({ direction: Hammer.DIRECTION_ALL }) );
-    hammertime.add( new Hammer.Tap({ event: 'doubletap', taps: 2 }) );
-    hammertime.add( new Hammer.Tap({ event: 'singletap' }) );
-    hammertime.get('doubletap').recognizeWith('singletap');
-    hammertime.get('singletap').requireFailure('doubletap');
+    // hammertime.add( new Hammer.Tap({ event: 'doubletap', taps: 2 }) );
+    // hammertime.add( new Hammer.Tap({ event: 'singletap' }) );
+    // hammertime.get('doubletap').recognizeWith('singletap');
+    // hammertime.get('singletap').requireFailure('doubletap');
 
     // hammertime.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
     hammertime.on('swiperight swipeleft', function(event) {
@@ -34,20 +34,17 @@ $(document).ready(function () {
 
     });
 
-    hammertime.on('doubletap', function(event) {
+    $('html').on('dblclick', function() {
 
-        alert(event.changedPointers.length);
+        var elem = $('html')[0];
 
-        var elem = document.querySelector('#body');
-
-        if(elem.requestFullScreen) {
-            elem.requestFullScreen();
-        } else if(elem.mozRequestFullScreen) {
+        if(elem.mozRequestFullScreen) {
             elem.mozRequestFullScreen();
+        } else if(elem.requestFullScreen) {
+            elem.requestFullScreen();
         } else if(elem.webkitRequestFullScreen) {
             elem.webkitRequestFullScreen();
         }
-
     });
 
 });
