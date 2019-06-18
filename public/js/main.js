@@ -36,7 +36,7 @@ $(document).ready(function () {
 
     hammertime.on('doubletap', function(event) {
 
-        console.log(event.changedPointers.length);
+        alert(event.changedPointers.length);
 
         if(myElement.requestFullScreen) {
             myElement.requestFullScreen();
