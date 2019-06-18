@@ -2,15 +2,15 @@
 
 namespace DoctrineMigrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
-use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+use Doctrine\Schema\Schema;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
 class Version20180517142342 extends AbstractMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
@@ -19,7 +19,7 @@ class Version20180517142342 extends AbstractMigration
         $this->addSql('ALTER TABLE app_users ADD CONSTRAINT FK_C2502824979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id)');
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');

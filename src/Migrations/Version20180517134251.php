@@ -2,15 +2,15 @@
 
 namespace DoctrineMigrations;
 
-use Doctrine\DBAL\Migrations\AbstractMigration;
-use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+use Doctrine\Schema\Schema;
 
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
 class Version20180517134251 extends AbstractMigration
 {
-    public function up(Schema $schema)
+    public function up(Schema $schema) : void
     {
         // 2016
         $this->addSql('INSERT INTO social_insurance_base (year, month, minimal_salary, average_salary, other_percent, retirement_percent, sickness_percent, accident_percent, health_percent) VALUES (2016, 1, 185000, 428080, 800, 1952, 245, 180, 900)');
@@ -68,7 +68,7 @@ class Version20180517134251 extends AbstractMigration
          */
     }
 
-    public function down(Schema $schema)
+    public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
 
