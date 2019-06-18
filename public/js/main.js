@@ -20,7 +20,7 @@ $(document).ready(function () {
     hammertime.get('singletap').requireFailure('doubletap');
 
     // hammertime.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-    hammertime.on('swiperight swipeleft singletap doubletap', function(event) {
+    hammertime.on('swiperight swipeleft', function(event) {
 
         if (event.type == 'swiperight') {
             $('.content > .wrapper').addClass('collapsed');
