@@ -11,10 +11,16 @@ $(document).ready(function () {
 
     var myElement = $('html')[0];
 
-    let hammertime = new Hammer(myElement);
-    hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+    let hammertime = new Hammer.Manager(myElement);
+
+    hammertime.add( new Hammer.Swipe({ direction: Hammer.DIRECTION_ALL }) );
+    hammertime.add( new Hammer.Tap({ event: 'doubletap', taps: 2 }) );
+    hammertime.add( new Hammer.Tap({ event: 'singletap' }) );
+    hammertime.get('doubletap').recognizeWith('singletap');
+    hammertime.get('singletap').requireFailure('doubletap');
+
     // hammertime.get('swipe').set({ direction: Hammer.DIRECTION_HORIZONTAL });
-    hammertime.on('swiperight swipeleft panstart', function(event) {
+    hammertime.on('swiperight swipeleft singletap doubletap', function(event) {
 
         if (event.type == 'swiperight') {
             $('.content > .wrapper').addClass('collapsed');
@@ -25,23 +31,19 @@ $(document).ready(function () {
             $('.content > .wrapper').removeClass('collapsed');
             $('.menu').removeClass('expanded');
         }
+        
+    });
 
-        if (event.type == 'panstart') {
+    hammertime.on('doubletap', function(event) {
 
-            if (event.changedPointers.length != 2 || event.direction != Hammer.DIRECTION_UP) {
-                return;
-            }
-
-            elem = document.querySelector('#body');
-
-            if(elem.requestFullScreen) {
-                elem.requestFullScreen();
-            } else if(elem.mozRequestFullScreen) {
-                elem.mozRequestFullScreen();
-            } else if(elem.webkitRequestFullScreen) {
-                elem.webkitRequestFullScreen();
-            }
+        if(myElement.requestFullScreen) {
+            myElement.requestFullScreen();
+        } else if(myElement.mozRequestFullScreen) {
+            myElement.mozRequestFullScreen();
+        } else if(myElement.webkitRequestFullScreen) {
+            myElement.webkitRequestFullScreen();
         }
+
     });
 
 });
