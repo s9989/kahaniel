@@ -34,17 +34,4 @@ $(document).ready(function () {
 
     });
 
-    $('html').on('dblclick', function() {
-
-        var elem = $('html')[0];
-
-        if(elem.mozRequestFullScreen) {
-            elem.mozRequestFullScreen();
-        } else if(elem.requestFullScreen) {
-            elem.requestFullScreen();
-        } else if(elem.webkitRequestFullScreen) {
-            elem.webkitRequestFullScreen();
-        }
-    });
-
 });

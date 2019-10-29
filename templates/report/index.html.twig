@@ -11,7 +11,7 @@
                     </div>
                     <a href="#">
                         {% if report.profits is defined %}
-                        VAT-7 <span class="date">{{ report.profits|length }} - {{ report.costs|length }}</span> {{ (report.profits_tax - report.costs_tax)|price }}<span class="value right"></span>
+                        VAT-7 <span class="date">{{ report.profits_net|length }} - {{ report.costs_net|length }}</span> {{ (report.profits_tax - report.costs_tax)|price }}<span class="value right"></span>
                         {% endif %}
                         <br>
                         {% if report.costs is defined %}
