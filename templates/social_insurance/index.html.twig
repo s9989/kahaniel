@@ -8,8 +8,8 @@
         <section class="last">
                 <div class="anchor social_insurance element">
                     <div class="menu">
-                        <a href="{{ path('social_insurance_change', {'id': base.id, 'action': 'pay'}) }}"><i class="material-icons">edit</i></a>
-                        <a href="{{ path('social_insurance_change', {'id': base.id, 'action': 'undo_payment'}) }}"><i class="material-icons">delete</i></a>
+                        <a href="{{ path('social_insurance_change', {'id': base.id, 'action': 'pay'}) }}"><i class="material-icons">attach_money</i></a>
+                        <a href="{{ path('social_insurance_change', {'id': base.id, 'action': 'undo_payment'}) }}"><i class="material-icons">money_off</i></a>
                     </div>
                     <a href="#">
                         <span class="date">{{ base.minimalSalary|price  }}</span>{{ base.averageSalary|price  }}<span class="value right"></span>

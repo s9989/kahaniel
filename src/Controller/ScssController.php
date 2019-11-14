@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use Leafo\ScssPhp\Compiler;
+use Symfony\Component\Routing\Annotation\Route;
 
-class ScssController extends Controller
+class ScssController extends AbstractController
 {
     /**
      * @Route("scss/main", name="scss/main")
@@ -20,13 +20,13 @@ class ScssController extends Controller
         $scss = new Compiler();
 
         $ds = DIRECTORY_SEPARATOR;
-        $scssFile = $this->get('kernel')->getRootDir() . $ds . '..' . $ds . 'public' . $ds . 'scss' . $ds . 'main.scss';
+        $scssFile = $this->getParameter('kernel.project_dir') . $ds . 'public' . $ds . 'scss' . $ds . 'main.scss';
 
         $sassString = file_get_contents($scssFile);
 
         $sha1 = sha1_file($scssFile);
 
-        $cacheDir = $this->get('kernel')->getCacheDir() . $ds . 'css';
+        $cacheDir = $this->getParameter('kernel.cache_dir') . $ds . 'css';
 
         if (!file_exists($cacheDir)) {
             mkdir($cacheDir);

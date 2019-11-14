@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\SocialInsuranceBase;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-class SocialInsuranceController extends Controller
+/**
+ * @Route("/panel")
+ */
+class SocialInsuranceController extends AbstractController
 {
     /**
      * @Route("/social_insurance", name="social_insurance")

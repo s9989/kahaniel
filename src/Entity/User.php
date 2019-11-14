@@ -71,6 +71,7 @@ class User implements UserInterface, \Serializable
     public function __construct()
     {
         $this->isActive = true;
+        $this->discount = false;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
     }
@@ -164,7 +165,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return \DateTime
      */
-    public function getStartDate(): \DateTime
+    public function getStartDate(): ?\DateTime
     {
         return $this->startDate;
     }

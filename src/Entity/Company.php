@@ -83,12 +83,6 @@ class Company
      */
     private $phone;
 
-    /**
-     * @ORM\Column(type="boolean", nullable=false)
-     * @var boolean
-     */
-    private $main;
-
     public function __construct()
     {
         $this->main = false;
@@ -315,21 +309,4 @@ class Company
         return $this;
     }
 
-    /**
-     * @return bool
-     */
-    public function isMain(): ?bool
-    {
-        return $this->main;
-    }
-
-    /**
-     * @param bool $main
-     * @return Company
-     */
-    public function setMain(bool $main): Company
-    {
-        $this->main = $main;
-        return $this;
-    }
 }
