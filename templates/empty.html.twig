@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}kahaniel{% endblock %}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% block stylesheets %}{% endblock %}
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="/css/clearfix.css">
-        <link rel="stylesheet" href="{{ url('scss/main') }}">
+        <link href="https://fonts.googleapis.com/css?family=Nova+Square&display=swap" rel="stylesheet">
+        {{ encore_entry_link_tags('css/cf') }}
+        {{ encore_entry_link_tags('css/common') }}
+        {{ encore_entry_link_tags('css/welcome') }}
+        {% block stylesheets %}{% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
     <body class="{% block body_class %}{% endblock %}" id="body">
         <div class="content">
@@ -18,6 +20,5 @@
             </div>
         </div>
         {% block submenu %}{% endblock %}
-        {% block javascripts %}{% endblock %}
     </body>
 </html>

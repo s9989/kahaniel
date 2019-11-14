@@ -3,9 +3,22 @@
 {% block title %}Witaj{% endblock %}
 
 {% block body %}
-    <section>
-        <div>
-            <h1>Super</h1>
+    <section class="lead">
+        <div class="title">KAHANIEL</div>
+        <div class="caption">Mini system księgowy</div>
+    </section>
+    <section class="presentation">
+        <div class="box">
+            <img src="{{ asset('welcome/1.png') }}" title="presentation slide 1" alt="presentation slide 1">
+            <span class="description">Dostępność</span>
+        </div>
+        <div class="box">
+            <img src="{{ asset('welcome/2.png') }}" title="presentation slide 2" alt="presentation slide 2">
+            <span class="description">Przystępność</span>
+        </div>
+        <div class="box">
+            <img src="{{ asset('welcome/3.png') }}" title="presentation slide 3" alt="presentation slide 3">
+            <span class="description">Wygoda</span>
         </div>
     </section>
 {% endblock %}

@@ -1,5 +1,7 @@
 var Encore = require('@symfony/webpack-encore');
 
+const CopyPlugin = require('copy-webpack-plugin');
+
 Encore
     // the project directory where compiled assets will be stored
     .setOutputPath('public/build/')
@@ -10,12 +12,26 @@ Encore
     // uncomment to create hashed filenames (e.g. app.abc123.css)
     // .enableVersioning(Encore.isProduction())
 
-    // uncomment to define the assets of the project
-    // .addEntry('js/app', './assets/js/app.js')
-    // .addStyleEntry('css/app', './assets/css/app.scss')
+    .enableSingleRuntimeChunk()
+
+    .addEntry('js/app', './assets/js/app.js')
+    .addEntry('js/welcome', './assets/js/welcome.js')
+    .addEntry('js/login', './assets/js/login.js')
+
+    .addStyleEntry('css/cf', './assets/css/clearfix.css')
+    .addStyleEntry('css/common', './assets/scss/common.scss')
+    .addStyleEntry('css/app', './assets/scss/app.scss')
+    .addStyleEntry('css/welcome', './assets/scss/welcome.scss')
+    .addStyleEntry('css/login', './assets/scss/login.scss')
 
     // uncomment if you use Sass/SCSS files
-    // .enableSassLoader()
+    .enableSassLoader()
+
+    .autoProvidejQuery()
+
+    .addPlugin(new CopyPlugin([
+        { from: './assets/img', to: 'img' }
+    ]))
 
     // uncomment for legacy applications that require $/jQuery as a global variable
     // .autoProvidejQuery()
