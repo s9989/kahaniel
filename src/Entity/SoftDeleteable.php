@@ -22,7 +22,7 @@ trait SoftDeleteable
      * @param bool $deletedAt
      * @return SoftDeleteable
      */
-    public function setDeletedAt(bool $deletedAt): SoftDeleteable
+    public function setDeletedAt(bool $deletedAt)
     {
         $this->deletedAt = $deletedAt;
         return $this;

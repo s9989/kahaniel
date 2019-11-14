@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}kahaniel{% endblock %}</title>
@@ -7,15 +7,23 @@
         {% block stylesheets %}{% endblock %}
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
+        <link rel="stylesheet" href="/js/datepicker/themes/default.css">
+        <link rel="stylesheet" href="/js/datepicker/themes/default.date.css">
+        <link rel="stylesheet" href="/js/datepicker/themes/default.time.css">
 
         <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
         <script src="/js/hammer.min.js"></script>
+        <script src="/js/datepicker/picker.js"></script>
+        <script src="/js/datepicker/picker.date.js"></script>
+        <script src="/js/datepicker/picker.time.js"></script>
+        <script src="/js/datepicker/legacy.js"></script>
+        <script src="/js/datepicker/translations/pl_PL.js"></script>
         <script src="/js/main.js"></script>
 
         <link rel="stylesheet" href="/css/clearfix.css">
         <link rel="stylesheet" href="{{ url('scss/main') }}">
     </head>
-    <body class="{% block body_class %}{% endblock %}">
+    <body class="{% block body_class %}{% endblock %}" id="body">
         <div class="header">
             <div class="lefty">
                 <i class="material-icons white menu-icon">menu</i>
@@ -35,7 +43,7 @@
                     <li class="costs"><a href="{{ url('cost_documents') }}"><i class="material-icons rtl">show_chart</i><span>Koszta</span></a></li>
                     <li class="insurance"><a href="{{ url('social_insurance') }}"><i class="material-icons">account_circle</i><span>ZUS</span></a></li>
                     <li class="companies"><a href="{{ url('companies') }}"><i class="material-icons">person</i><span>Kontrahenci</span></a></li>
-                    <li class="report"><a href=""><i class="material-icons">event_note</i><span>Raport</span></a></li>
+                    <li class="report"><a href="{{ url('reports') }}"><i class="material-icons">event_note</i><span>Raport</span></a></li>
                 </ul>
             </div>
             <div class="wrapper">

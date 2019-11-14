@@ -3,12 +3,12 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-    <div class="login_bg enter"></div>
-    <form action="{{ path('login') }}" method="post" class="login enter">
+    <div class="login_bg{% if not error %} enter{% endif %}"></div>
+    <form action="{{ path('login') }}" method="post" class="login{% if not error %} enter{% endif %}">
         {% if error %}
-            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-        <input placeholder="username" type="text" id="username" name="_username" value="{{ last_username }}">
+        <input placeholder="username" type="text" id="username" name="_username" value="{{ last_username }}" autofocus>
         <input placeholder="password" type="password" id="password" name="_password">
         <input type="submit" value="login">
     </form>
@@ -17,6 +17,14 @@
 {% block javascripts %}
     <script type="text/javascript">
     $(document).ready(function() {
+
+        $(document).keypress(function(e) {
+            if($('.login_bg').hasClass('enter') && e.which === 13) {
+                $('form.enter').removeClass('enter');
+                $('.login_bg').removeClass('enter');
+            }
+        });
+
         $('.login_bg.enter').on('click', function() {
             $('form.enter').removeClass('enter');
             $(this).removeClass('enter');

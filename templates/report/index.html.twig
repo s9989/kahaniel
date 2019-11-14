@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reports{% endblock %}
+
+{% block body %}
+    {% for report in reports %}
+        <div class="caption">{{ report.fullMonth }}</div>
+        <section class="last">
+                <div class="anchor social_insurance element">
+                    <div class="menu">
+                    </div>
+                    <a href="#">
+                        {% if report.profits is defined %}
+                        VAT-7 <span class="date">{{ report.profits_net|length }} - {{ report.costs_net|length }}</span> {{ (report.profits_tax - report.costs_tax)|price }}<span class="value right"></span>
+                        {% endif %}
+                        <br>
+                        {% if report.costs is defined %}
+                        PIT <span class="date"></span> {{ ((report.profits_tax - report.costs_tax)*19/100)|price }}<span class="value right"></span>
+                        <span class="date">{{ report.costs|length }}</span> {{ report.costs_gross|price }}<span class="value right"></span>
+                        {% endif %}
+                    </a>
+                </div>
+        </section>
+    {% endfor %}
+{% endblock %}

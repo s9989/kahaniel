@@ -165,10 +165,14 @@ body {
 }
 
 .content .caption {
-    margin: 0 13px 4px;
+    margin: 20px 13px 4px;
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     font-size: 12px;
+
+    &:first-child {
+        margin-top: 0;
+    }
 }
 
 .content section {
@@ -297,7 +301,7 @@ form {
             padding: 2px 0;
         }
 
-        & > div, & > input, & > select {
+        & > div, & > input, & > select, & > button {
             width: 98%;
             padding: 4px 1%;
 
@@ -309,7 +313,7 @@ form {
             font-size: 16px;
         }
 
-        & > select {
+        & > select, & > button {
             width: 100%;
         }
 
@@ -318,6 +322,10 @@ form {
         select {
             //padding: 4px;
             border: solid 1px #ddd;
+        }
+
+        [type="submit"] {
+
         }
     }
 }
@@ -353,6 +361,16 @@ form.login {
             font-weight: 500;
         }
     }
+
+    div.error {
+        color: red;
+        padding: 20px;
+        background-color: white;
+        filter: opacity(70%);
+        max-width: 500px;
+        margin: 20px auto;
+    }
+
     &.enter {
         display: none;
     }
