@@ -2,23 +2,27 @@
 
 {% block title %}Witaj{% endblock %}
 
+{% block body_class %}welcome{% endblock %}
+
 {% block body %}
-    <section class="lead">
-        <div class="title">KAHANIEL</div>
-        <div class="caption">Mini system księgowy</div>
-    </section>
     <section class="presentation">
         <div class="box">
-            <img src="{{ asset('welcome/1.png') }}" title="presentation slide 1" alt="presentation slide 1">
+            <img src="{{ asset('build/img/presentation1.jpg') }}" title="presentation slide 1" alt="presentation slide 1">
             <span class="description">Dostępność</span>
         </div>
         <div class="box">
-            <img src="{{ asset('welcome/2.png') }}" title="presentation slide 2" alt="presentation slide 2">
-            <span class="description">Przystępność</span>
+            <img src="{{ asset('build/img/presentation2.jpg') }}" title="presentation slide 2" alt="presentation slide 2">
+            <span class="description">Prostota</span>
         </div>
         <div class="box">
-            <img src="{{ asset('welcome/3.png') }}" title="presentation slide 3" alt="presentation slide 3">
+            <img src="{{ asset('build/img/presentation3.jpg') }}" title="presentation slide 3" alt="presentation slide 3">
             <span class="description">Wygoda</span>
+        </div>
+    </section>
+    <section>
+        <div class="actions">
+            <a class="button" href="#">Załóż konto</a>
+            <a class="default" href="{{ url('login') }}">Zaloguj się</a>
         </div>
     </section>
 {% endblock %}

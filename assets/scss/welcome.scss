@@ -1,12 +1,134 @@
+@import "variables";
+
 a {
-    color: red;
+    color: black;
 }
 
 body {
+
     background-color: #f2f2f2;
+
+    @media screen and (max-width: $break-large) {
+        background-color: white;
+    }
+
+    .content {
+        background-color: white;
+        box-shadow: 0 0 15px #bbb;
+
+        max-width: 1200px;
+        min-width: $break-mobile;
+        margin: 40px auto 0;
+
+        @media screen and (max-width: $break-large) {
+            margin-top: 0;
+            box-shadow: none;
+        }
+
+        .inner {
+            padding: 20px;
+        }
+    }
+
+    .header {
+
+        margin-bottom: 20px;
+
+        .lead {
+
+            text-align: center;
+            .title {
+                font-family: 'Nova Square', cursive;
+                font-size: 120px;
+
+                color: #3e3e3e;
+                padding: 10px 0;
+
+                @media screen and (max-width: $break-medium) {
+                    font-size: 56px;
+                }
+            }
+            .caption {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 300;
+                font-size: 14px;
+            }
+        }
+    }
+
+    &.welcome {
+
+        .wrapper {
+
+            .presentation {
+                padding-bottom: 20px;
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                margin-bottom: 20px;
+
+                .box {
+
+                    padding: 60px 0 0;
+                    text-align: center;
+
+                    img {
+                        display: block;
+                        margin: 0 auto;
+                        max-width: 360px;
+                        width: 100%;
+                        min-width: 200px;
+
+                    }
+
+                    .description {
+                        display: block;
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 100;
+                        font-size: 20px;
+                        padding: 10px 0;
+
+                        @media screen and (max-width: $break-medium) {
+                            font-weight: 300;
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+
+            .actions {
+                text-align: center;
+
+                a {
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 300;
+                    font-size: 16px;
+                    display: block;
+                    padding: 10px 0;
+
+                    &.button {
+                        margin-bottom: 10px;
+                    }
+                }
+
+            }
+        }
+    }
+
 }
 
-.wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
+.button {
+    background-color: #2a72cc;
+    color: white;
+    &:hover {
+        transition: background-color 0.5s ease;
+        background-color: #274b96;
+    }
+}
+
+.default {
+    &:hover {
+        transition: color 0.5s ease;
+        color: #2a72cc;
+    }
 }

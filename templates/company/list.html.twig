@@ -1,8 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Firmy{% endblock %}
+{% block title %}Kontrahenci{% endblock %}
 
 {% block body_class %}{% if companies|length == 0 %}empty{% endif %}{% endblock %}
+
+{% block current %}Kontrahenci{% endblock %}
 
 {% block body %}
     <section id="xxx">

@@ -15,8 +15,16 @@
     </head>
     <body class="{% block body_class %}{% endblock %}" id="body">
         <div class="content">
-            <div class="wrapper">
-                {% block body %}{% endblock %}
+            <div class="inner">
+                <div class="header">
+                    <a class="lead" href="{{ url('welcome') }}">
+                        <div class="title">KAHANIEL</div>
+                        <div class="caption">MINI SYSTEM KSIĘGOWY</div>
+                    </a>
+                </div>
+                <div class="wrapper">
+                        {% block body %}{% endblock %}
+                </div>
             </div>
         </div>
         {% block submenu %}{% endblock %}

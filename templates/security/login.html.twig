@@ -11,13 +11,12 @@
 {% endblock %}
 
 {% block body %}
-    <div class="login_bg{% if not error %} enter{% endif %}"></div>
     <form action="{{ path('login') }}" method="post" class="login{% if not error %} enter{% endif %}">
         {% if error %}
             <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
-        <input placeholder="username" type="text" id="username" name="_username" value="{{ last_username }}" autofocus>
-        <input placeholder="password" type="password" id="password" name="_password">
-        <input type="submit" value="login">
+        <input placeholder="login" type="text" id="username" name="_username" value="{{ last_username }}" autofocus>
+        <input placeholder="hasło" type="password" id="password" name="_password">
+        <input class="button" type="submit" value="Zaloguj">
     </form>
 {% endblock %}
