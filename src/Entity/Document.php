@@ -54,7 +54,7 @@ class Document
     private $number;
 
     /**
-     * @ORM\Column(type="string", length=60, nullable=false)
+     * @ORM\Column(type="string", length=60, nullable=true)
      * @var string
      */
     private $accountNumber;
