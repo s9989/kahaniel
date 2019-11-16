@@ -6,7 +6,7 @@
 
 {% block body %}
     {% for month, documents in collection %}
-        <div class="caption">{{ month|date('F, Y') }}</div>
+        <div class="caption">{{ month|localizeddate('none', 'none', app.request.locale, null, 'LLLL, Y')|capitalize }}</div>
         <section>
         {% for document in documents %}
             <div class="anchor document element">

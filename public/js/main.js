@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     $('.js-datepicker').pickadate({
-        format: 'yyyy-mm-dd'
+        format: 'd.m.yyyy'
     });
 
     $('.menu-icon').on('click', function() {

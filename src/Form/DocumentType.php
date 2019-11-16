@@ -27,8 +27,20 @@ class DocumentType extends AbstractType
             ->add('description', null, ['label' => 'Opis'])
             ->add('number', null, ['label' => 'Numer'])
             ->add('accountNumber', null, ['label' => 'Numer konta'])
-            ->add('issueDate', DateType::class, ['label' => 'Data wystawienia', 'attr' => ['class' => 'js-datepicker'], 'widget' => 'single_text', 'html5' => false])
-            ->add('paymentDate', DateType::class, ['label' => 'Data płatności', 'attr' => ['class' => 'js-datepicker'], 'widget' => 'single_text', 'html5' => false])
+            ->add('issueDate', DateType::class, [
+                'label' => 'Data wystawienia',
+                'format' => 'd.M.Y',
+                'attr' => ['class' => 'js-datepicker'],
+                'widget' => 'single_text',
+                'html5' => false,
+            ])
+            ->add('paymentDate', DateType::class, [
+                'label' => 'Data płatności',
+                'format' => 'd.M.Y',
+                'attr' => ['class' => 'js-datepicker'],
+                'widget' => 'single_text',
+                'html5' => false,
+            ])
             ->add('place', null, ['label' => 'Miejsce'])
             ->add('net', null, ['label' => 'Netto', 'attr' => ['step' => '0.01']])
             ->add('taxPercent', null, ['label' => 'Podatek(%)'])

@@ -35,7 +35,7 @@ class ReportService
                 $reports[$Ym]['costs_tax'] = 0;
                 $reports[$Ym]['costs_gross'] = 0;
             }
-            $reports[$Ym]['fullMonth'] = $profit->getIssueDate()->format('F, Y');
+            $reports[$Ym]['fullMonth'] = $profit->getIssueDate()->format('U');
             $reports[$Ym]['profits'][] = $profit;
 
             $reports[$Ym]['profits_net'] += $profit->getNet();
@@ -53,7 +53,7 @@ class ReportService
                 $reports[$Ym]['costs_tax'] = 0;
                 $reports[$Ym]['costs_gross'] = 0;
             }
-            $reports[$Ym]['fullMonth'] = $cost->getIssueDate()->format('F, Y');
+            $reports[$Ym]['fullMonth'] = $cost->getIssueDate()->format('U');
             $reports[$Ym]['costs'][] = $cost;
 
             $reports[$Ym]['costs_net'] += $cost->getNet();

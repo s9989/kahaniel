@@ -4,19 +4,17 @@
 
 {% block body %}
     {% for report in reports %}
-        <div class="caption">{{ report.fullMonth }}</div>
+        <div class="caption">{{ report.fullMonth|localizeddate('none', 'none', app.request.locale, null, 'LLLL, Y')|capitalize }}</div>
         <section class="last">
                 <div class="anchor social_insurance element">
                     <div class="menu">
                     </div>
                     <a href="#">
                         {% if report.profits is defined %}
-                        VAT-7 <span class="date">{{ report.profits_net|length }} - {{ report.costs_net|length }}</span> {{ (report.profits_tax - report.costs_tax)|price }}<span class="value right"></span>
+                        <div>VAT-7: {{ (report.profits_tax - report.costs_tax)|price }}<span class="value right"></span></div>
                         {% endif %}
-                        <br>
                         {% if report.costs is defined %}
-                        PIT <span class="date"></span> {{ ((report.profits_tax - report.costs_tax)*19/100)|price }}<span class="value right"></span>
-                        <span class="date">{{ report.costs|length }}</span> {{ report.costs_gross|price }}<span class="value right"></span>
+                        <div>PIT: {{ ((report.profits_tax - report.costs_tax)*19/100)|price }}<span class="value right"></span></div>
                         {% endif %}
                     </a>
                 </div>

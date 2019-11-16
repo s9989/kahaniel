@@ -114,7 +114,7 @@ class SocialInsuranceBase
 
     public function getFullMonth(): string
     {
-        return $this->getDate()->format('F, Y');
+        return $this->getDate()->format('F, xxY');
     }
 
     /**
