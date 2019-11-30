@@ -23,29 +23,67 @@ class DocumentType extends AbstractType
                 'Amortyzacja' => 3,
                 'Inne' => 0,
             ]])
-            ->add('title', null, ['label' => 'Tytuł', 'attr' => ['data-required' => true]])
-            ->add('description', null, ['label' => 'Opis'])
-            ->add('number', null, ['label' => 'Numer'])
-            ->add('accountNumber', null, ['label' => 'Numer konta'])
+            ->add('title', null, ['label' => 'Tytuł', 'attr' => [
+                'data-required' => true,
+                'data-minlength' => 2,
+                'data-maxlength' => 50,
+            ]])
+            ->add('description', null, ['label' => 'Opis', 'attr' => [
+                'data-maxlength' => 255,
+            ]])
+            ->add('number', null, ['label' => 'Numer', 'attr' => [
+                'data-required' => true,
+                'data-minlength' => 4,
+                'data-maxlength' => 40,
+            ]])
+            ->add('accountNumber', null, ['label' => 'Numer konta', 'attr' => [
+                'data-regex' => 'account_number',
+                'data-maxlength' => 60,
+            ]])
             ->add('issueDate', DateType::class, [
                 'label' => 'Data wystawienia',
                 'format' => 'd.M.Y',
-                'attr' => ['class' => 'js-datepicker'],
+                'attr' => [
+                    'class' => 'js-datepicker',
+                    'data-required' => true,
+                ],
                 'widget' => 'single_text',
                 'html5' => false,
             ])
             ->add('paymentDate', DateType::class, [
                 'label' => 'Data płatności',
                 'format' => 'd.M.Y',
-                'attr' => ['class' => 'js-datepicker'],
+                'attr' => [
+                    'class' => 'js-datepicker',
+                    'data-required' => true,
+                ],
                 'widget' => 'single_text',
                 'html5' => false,
             ])
-            ->add('place', null, ['label' => 'Miejsce'])
-            ->add('net', null, ['label' => 'Netto', 'attr' => ['step' => '0.01']])
-            ->add('taxPercent', null, ['label' => 'Podatek(%)'])
-            ->add('tax', null, ['label' => 'Podatek', 'attr' => ['step' => '0.01']])
-            ->add('gross', null, ['label' => 'Brutto', 'attr' => ['step' => '0.01']])
+            ->add('place', null, ['label' => 'Miejsce', 'attr' => [
+                'data-required' => true,
+                'data-minlength' => 2,
+                'data-maxlength' => 40,
+            ]])
+            ->add('net', null, ['label' => 'Netto', 'attr' => [
+                'step' => '0.01',
+                'data-required' => true,
+                'data-regex' => 'price',
+            ]])
+            ->add('taxPercent', null, ['label' => 'Podatek(%)', 'attr' => [
+                'data-required' => true,
+                'data-regex' => 'number',
+            ]])
+            ->add('tax', null, ['label' => 'Podatek', 'attr' => [
+                'step' => '0.01',
+                'data-required' => true,
+                'data-regex' => 'price',
+            ]])
+            ->add('gross', null, ['label' => 'Brutto', 'attr' => [
+                'step' => '0.01',
+                'data-required' => true,
+                'data-regex' => 'price',
+            ]])
             ->add('buyer', null, ['label' => 'Kupujący'])
             ->add('seller', null, ['label' => 'Sprzedający'])
             ->add('viewers', null, ['label' => 'Do wglądu', 'attr' => ['data-autocomplete' => 'true']])

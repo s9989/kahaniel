@@ -250,7 +250,7 @@ form {
 
     & > div > div {
         position: relative;
-        height: 49px;
+        height: 58px;
         margin-bottom: 10px;
 
         & > label {
@@ -263,11 +263,18 @@ form {
             padding: 2px 0;
         }
 
+        & > input + span {
+            font-family: Roboto;
+            font-size: 12px;
+            padding: 3px 0 0;
+            color: red;
+            display: block;
+        }
+
         & > div, & > input, & > select, & > button {
             width: 98%;
             padding: 4px 1%;
 
-            position: absolute;
             left: 0;
             right: 0;
             font-family: 'Roboto', sans-serif;

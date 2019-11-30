@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\DocumentRepository")
@@ -39,24 +40,48 @@ class Document
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
      * @var string
+     * @Assert\NotBlank(message="Tytuł nie może być pusty")
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Tytuł nie może mieć mniej niż {{ limit }} znaki",
+     *      maxMessage = "Tytuł nie może mieć więcej niż {{ limit }} znaków"
+     * )
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Opis nie może być krótszy niż {{ limit }} znaków"
+     * )
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=false)
      * @var string
+     * @Assert\NotBlank(message="Numer konta jest wymagany")
+     * @Assert\Length(
+     *      min = 4,
+     *      max = 40,
+     *      minMessage = "Numer nie może mieć mniej niż {{ limit }} znaki",
+     *      maxMessage = "Numer nie może mieć więcej niż {{ limit }} znaków"
+     * )
      */
     private $number;
 
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
      * @var string
+     * @Assert\NotBlank(message="Numer konta jest wymagany")
+     * @Assert\Length(
+     *      min = 26,
+     *      max = 26,
+     *      exactMessage="Numer konta musi mieć dokładnie {{ limit }} znaków"
+     * )
      */
     private $accountNumber;
 
@@ -77,42 +102,53 @@ class Document
     /**
      * @ORM\Column(name="issue_date", type="date", nullable=false)
      * @var \DateTime
+     * @Assert\NotBlank(message="Data wystawienia jest wymagana")
      */
     private $issueDate;
 
     /**
      * @ORM\Column(name="payment_date", type="date", nullable=false)
      * @var \DateTime
+     * @Assert\NotBlank(message="Data płatności jest wymagana")
      */
     private $paymentDate;
 
     /**
      * @ORM\Column(type="string", length=40, nullable=false)
      * @var string
+     * @Assert\NotBlank(message="Miejsce jest wymagane")
+     * @Assert\Length(
+     *      max = 60,
+     *      maxMessage="Miejsce musi mieć nie więcej niż {{ limit }} znaków"
+     * )
      */
     private $place;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @var integer
+     * @Assert\NotBlank(message="Kwota netto jest wymagana")
      */
     private $net;
 
     /**
      * @ORM\Column(type="integer", name="tax_percent", nullable=false)
      * @var integer
+     * @Assert\NotBlank(message="Procent podatku jest wymagany")
      */
     private $taxPercent;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @var integer
+     * @Assert\NotBlank(message="Wartość podatku jest wymagana")
      */
     private $tax;
 
     /**
      * @ORM\Column(type="integer", nullable=false)
      * @var integer
+     * @Assert\NotBlank(message="Kwota brutto jest wymagana")
      */
     private $gross;
 
