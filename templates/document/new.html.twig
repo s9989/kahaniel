@@ -2,12 +2,19 @@
 
 {% block title %}New document{% endblock %}
 
-{% use 'form_div_layout.html.twig' %}
+{% form_theme form _self %}
 
-{%- block form_row -%}
-    {{ parent() }}
-    <span class="error"></span>
-{%- endblock form_row -%}
+{%- block form_errors -%}
+    <span class="error">
+    {%- if errors|length > 0 -%}
+        <ul>
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+    </span>
+{%- endblock form_errors -%}
 
 {% block body %}
 <section>
