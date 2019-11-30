@@ -17,6 +17,7 @@ Encore
     .addEntry('js/app', './assets/js/app.js')
     .addEntry('js/welcome', './assets/js/welcome.js')
     .addEntry('js/login', './assets/js/login.js')
+    .addEntry('js/validation', './assets/js/validation.js')
 
     .addStyleEntry('css/cf', './assets/css/clearfix.css')
     .addStyleEntry('css/common', './assets/scss/common.scss')

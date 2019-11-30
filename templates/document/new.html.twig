@@ -2,6 +2,13 @@
 
 {% block title %}New document{% endblock %}
 
+{% use 'form_div_layout.html.twig' %}
+
+{%- block form_row -%}
+    {{ parent() }}
+    <span class="error"></span>
+{%- endblock form_row -%}
+
 {% block body %}
 <section>
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}

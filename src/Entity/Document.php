@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -115,11 +116,18 @@ class Document
      */
     private $gross;
 
+    /**
+     * Many Users have Many Documents.
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="documents")
+     */
+    private $viewers;
+
     public function __construct()
     {
         $this->issueDate = new \DateTime();
         $this->paymentDate = new \DateTime();
         $this->description = '';
+        $this->viewers = new ArrayCollection();
     }
 
     /**
@@ -408,5 +416,21 @@ class Document
     {
         $this->gross = $gross;
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getViewers(): ArrayCollection
+    {
+        return $this->viewers;
+    }
+
+    /**
+     * @param ArrayCollection $viewers
+     */
+    public function setViewers(ArrayCollection $viewers): void
+    {
+        $this->viewers = $viewers;
     }
 }

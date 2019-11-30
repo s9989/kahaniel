@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -68,12 +69,20 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * Many Users have Many Documents.
+     * @ORM\ManyToMany(targetEntity="Document", inversedBy="viewers")
+     * @ORM\JoinTable(name="users_documents")
+     */
+    private $documents;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->discount = false;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
+        $this->documents = new ArrayCollection();
     }
 
     public function getUsername()
@@ -270,5 +279,26 @@ class User implements UserInterface, \Serializable
     {
         $this->sicknessPayer = $sicknessPayer;
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getDocuments(): ArrayCollection
+    {
+        return $this->documents;
+    }
+
+    /**
+     * @param ArrayCollection $documents
+     */
+    public function setDocuments(ArrayCollection $documents): void
+    {
+        $this->documents = $documents;
+    }
+
+    public function __toString()
+    {
+        return $this->getUsername();
     }
 }

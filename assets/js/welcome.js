@@ -1,1 +1,1 @@
-console.info('Welcome javascript loaded');
+console.info('⚪ Welcome javascript loaded');

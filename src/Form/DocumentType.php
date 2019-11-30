@@ -23,7 +23,7 @@ class DocumentType extends AbstractType
                 'Amortyzacja' => 3,
                 'Inne' => 0,
             ]])
-            ->add('title', null, ['label' => 'Tytuł'])
+            ->add('title', null, ['label' => 'Tytuł', 'attr' => ['data-required' => true]])
             ->add('description', null, ['label' => 'Opis'])
             ->add('number', null, ['label' => 'Numer'])
             ->add('accountNumber', null, ['label' => 'Numer konta'])
@@ -48,6 +48,7 @@ class DocumentType extends AbstractType
             ->add('gross', null, ['label' => 'Brutto', 'attr' => ['step' => '0.01']])
             ->add('buyer', null, ['label' => 'Kupujący'])
             ->add('seller', null, ['label' => 'Sprzedający'])
+            ->add('viewers', null, ['label' => 'Do wglądu', 'attr' => ['data-autocomplete' => 'true']])
             ->add('save', SubmitType::class, ['label' => 'Zapisz'])
         ;
     }
