@@ -149,5 +149,4 @@ $(document).ready(function() {
         }
 
     });
-
 });
