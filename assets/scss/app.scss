@@ -268,7 +268,10 @@ form {
             font-size: 12px;
             padding: 3px 0 0;
             color: red;
-            display: block;
+            display: none;
+            &.visible {
+                display: block;
+            }
         }
 
         & > div, & > input, & > select, & > button {

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -71,8 +72,8 @@ class User implements UserInterface, \Serializable
 
     /**
      * Many Users have Many Documents.
-     * @ORM\ManyToMany(targetEntity="Document", inversedBy="viewers")
-     * @ORM\JoinTable(name="users_documents")
+     * @ORM\ManyToMany(targetEntity="Document", inversedBy="viewers", cascade={"persist"})
+     * @ORM\JoinTable(name="document_user")
      */
     private $documents;
 
@@ -82,6 +83,7 @@ class User implements UserInterface, \Serializable
         $this->discount = false;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
+        $this->sicknessPayer = false;
         $this->documents = new ArrayCollection();
     }
 
@@ -282,17 +284,17 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getDocuments(): ArrayCollection
+    public function getDocuments(): Collection
     {
         return $this->documents;
     }
 
     /**
-     * @param ArrayCollection $documents
+     * @param Collection $documents
      */
-    public function setDocuments(ArrayCollection $documents): void
+    public function setDocuments(Collection $documents): void
     {
         $this->documents = $documents;
     }

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -154,7 +155,7 @@ class Document
 
     /**
      * Many Users have Many Documents.
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="documents")
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="documents", cascade={"persist"})
      */
     private $viewers;
 
@@ -455,18 +456,30 @@ class Document
     }
 
     /**
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getViewers(): ArrayCollection
+    public function getViewers(): Collection
     {
         return $this->viewers;
     }
 
     /**
-     * @param ArrayCollection $viewers
+     * @param Collection $viewers
      */
-    public function setViewers(ArrayCollection $viewers): void
+    public function setViewers(Collection $viewers): void
     {
         $this->viewers = $viewers;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function addViewer(User $user)
+    {
+        if ($this->viewers->contains($user)) {
+            return;
+        }
+
+        $this->viewers[] = ($user);
     }
 }

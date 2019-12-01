@@ -12,17 +12,49 @@ class CompanyFixtures extends Fixture
     {
         $company = new Company();
 
-        $company->setNip('9570954994');
-        $company->setName('Jakub Kuryłowicz');
-        $company->setFirstName('Jakub');
-        $company->setLastName('Kuryłowicz');
-        $company->setStreet('K. I. Gałczyńskiego');
+        $company->setNip('1548845014');
+        $company->setName('Coca Cola S.A.');
+        $company->setFirstName('Jan');
+        $company->setLastName('Kowalski');
+        $company->setStreet('Polna');
+        $company->setHouseNumber('1');
+        $company->setApartamentNumber('2');
+        $company->setCity('Warszawa');
+        $company->setPostCode('00-001');
+        $company->setEmail('jan@test.com');
+        $company->setPhone('888888888');
+
+        $manager->persist($company);
+
+        $company = new Company();
+
+        $company->setNip('9528858147');
+        $company->setName('Pepsi sp. z o. o.');
+        $company->setFirstName('Ewa');
+        $company->setLastName('Banach');
+        $company->setStreet('Kijewska');
+        $company->setHouseNumber('4');
+        $company->setApartamentNumber('12');
+        $company->setCity('Kraków');
+        $company->setPostCode('02-200');
+        $company->setEmail('ewa@test.com');
+        $company->setPhone('848684865');
+
+        $manager->persist($company);
+
+        $company = new Company();
+
+        $company->setNip('1582065178');
+        $company->setName('Adam Nowak');
+        $company->setFirstName('Adam');
+        $company->setLastName('Nowak');
+        $company->setStreet('Gołębia');
         $company->setHouseNumber('5');
-        $company->setApartamentNumber('37');
-        $company->setCity('Pisz');
-        $company->setPostCode('12-200');
-        $company->setEmail('jakub@kurylowicz.pisz.pl');
-        $company->setPhone('792006549');
+        $company->setApartamentNumber('1');
+        $company->setCity('Gdańsk');
+        $company->setPostCode('10-000');
+        $company->setEmail('adam@test.com');
+        $company->setPhone('777888999');
 
         $manager->persist($company);
 

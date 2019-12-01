@@ -3,7 +3,25 @@
 {% block body %}
     <section>
         <div>
-            <h1>Siema {{ name }}!</h1>
+            <h1>Witaj {{ user.username }}!</h1>
         </div>
     </section>
+    {% if user.documents is not empty %}
+    <section>
+        <div>
+            <h3>Oto ostatnio udostępnione dla Ciebie faktury:</h3>
+        </div>
+        {% for document in user.documents %}
+            <div class="anchor document element">
+                <div class="menu">
+                    <a href="{{ path('edit_document', {'id': document.id}) }}"><i class="material-icons">edit</i></a>
+                    <a href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
+                </div>
+                <a href="{{ path('show_document', {'id': document.id}) }}">
+                    <span class="date">{{ document.issueDate|date('d.m.Y') }}</span>{{ document.title }}<span class="value right">{{ document.gross|price }}</span>
+                </a>
+            </div>
+        {% endfor %}
+    </section>
+    {% endif %}
 {% endblock %}

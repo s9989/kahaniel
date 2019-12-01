@@ -25,7 +25,7 @@ $(document).ready(function() {
     });
 
     $('form.validate').on('submit', function(e) {
-        if (!validateForm($(this))) {
+        if (!$(this).hasClass('no-validate') && !validateForm($(this))) {
             e.preventDefault();
         }
     });

@@ -12,6 +12,10 @@ class WelcomeController extends AbstractController
      */
     public function index()
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
+
         return $this->render('welcome/index.html.twig', []);
     }
 
