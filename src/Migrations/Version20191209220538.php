@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191116160026 extends AbstractMigration
+final class Version20191209220538 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,7 @@ final class Version20191116160026 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE company DROP main');
-        $this->addSql('ALTER TABLE document CHANGE account_number account_number VARCHAR(60) DEFAULT NULL');
+        $this->addSql('ALTER TABLE company DROP discount');
     }
 
     public function down(Schema $schema) : void
@@ -31,7 +30,6 @@ final class Version20191116160026 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE company ADD main TINYINT(1) NOT NULL');
-        $this->addSql('ALTER TABLE document CHANGE account_number account_number VARCHAR(60) CHARACTER SET utf8 NOT NULL COLLATE `utf8_general_ci`');
+        $this->addSql('ALTER TABLE company ADD discount TINYINT(1) NOT NULL');
     }
 }

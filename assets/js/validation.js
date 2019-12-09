@@ -28,6 +28,10 @@ $(document).ready(function() {
         if (!$(this).hasClass('no-validate') && !validateForm($(this))) {
             e.preventDefault();
         }
+        $(this).find('[data-regex="price"]').each(function(k, elem) {
+            let $val = $(elem).val();
+            $(elem).val($val.replace(',',''));
+        });
     });
 
     function validateForm(form) {
@@ -131,7 +135,7 @@ $(document).ready(function() {
                 message = 'Tylko cyfry';
                 break;
             case 'price':
-                regex = '^\\d+\\.\\d+$';
+                regex = '^\\d+,\\d+$';
                 message = 'Cena musi być w formie zmiennoprzecinkowej.';
                 break;
             default:

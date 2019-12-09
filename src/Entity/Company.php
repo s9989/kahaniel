@@ -83,9 +83,34 @@ class Company
      */
     private $phone;
 
+    /**
+     * @var \DateTime
+     * @ORM\Column(type="date", name="start_date", nullable=true)
+     */
+    private $startDate;
+
+    /**
+     * @var boolean
+     */
+    private $discount;
+
+    /**
+     * @var boolean
+     * @ORM\Column(type="boolean")
+     */
+    private $sicknessPayer;
+
+    /**
+     * @var User
+     * @ORM\OneToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $owner;
+
     public function __construct()
     {
-        $this->main = false;
+        $this->discount = false;
+        $this->sicknessPayer = false;
     }
 
     public function __toString()
@@ -103,12 +128,10 @@ class Company
 
     /**
      * @param mixed $id
-     * @return Company
      */
     public function setId($id)
     {
         $this->id = $id;
-        return $this;
     }
 
     /**
@@ -121,12 +144,10 @@ class Company
 
     /**
      * @param string $nip
-     * @return Company
      */
-    public function setNip(string $nip): Company
+    public function setNip(string $nip): void
     {
         $this->nip = $nip;
-        return $this;
     }
 
     /**
@@ -139,12 +160,10 @@ class Company
 
     /**
      * @param string $name
-     * @return Company
      */
-    public function setName(string $name): Company
+    public function setName(string $name): void
     {
         $this->name = $name;
-        return $this;
     }
 
     /**
@@ -157,12 +176,10 @@ class Company
 
     /**
      * @param string $firstName
-     * @return Company
      */
-    public function setFirstName(string $firstName): Company
+    public function setFirstName(string $firstName): void
     {
         $this->firstName = $firstName;
-        return $this;
     }
 
     /**
@@ -175,12 +192,10 @@ class Company
 
     /**
      * @param string $lastName
-     * @return Company
      */
-    public function setLastName(string $lastName): Company
+    public function setLastName(string $lastName): void
     {
         $this->lastName = $lastName;
-        return $this;
     }
 
     /**
@@ -193,12 +208,10 @@ class Company
 
     /**
      * @param string $street
-     * @return Company
      */
-    public function setStreet(string $street): Company
+    public function setStreet(string $street): void
     {
         $this->street = $street;
-        return $this;
     }
 
     /**
@@ -211,12 +224,10 @@ class Company
 
     /**
      * @param string $houseNumber
-     * @return Company
      */
-    public function setHouseNumber(string $houseNumber): Company
+    public function setHouseNumber(string $houseNumber): void
     {
         $this->houseNumber = $houseNumber;
-        return $this;
     }
 
     /**
@@ -229,12 +240,10 @@ class Company
 
     /**
      * @param string $apartamentNumber
-     * @return Company
      */
-    public function setApartamentNumber(string $apartamentNumber): Company
+    public function setApartamentNumber(string $apartamentNumber): void
     {
         $this->apartamentNumber = $apartamentNumber;
-        return $this;
     }
 
     /**
@@ -247,12 +256,10 @@ class Company
 
     /**
      * @param string $city
-     * @return Company
      */
-    public function setCity(string $city): Company
+    public function setCity(string $city): void
     {
         $this->city = $city;
-        return $this;
     }
 
     /**
@@ -265,12 +272,10 @@ class Company
 
     /**
      * @param string $postCode
-     * @return Company
      */
-    public function setPostCode(string $postCode): Company
+    public function setPostCode(string $postCode): void
     {
         $this->postCode = $postCode;
-        return $this;
     }
 
     /**
@@ -283,12 +288,10 @@ class Company
 
     /**
      * @param string $email
-     * @return Company
      */
-    public function setEmail(string $email): Company
+    public function setEmail(string $email): void
     {
         $this->email = $email;
-        return $this;
     }
 
     /**
@@ -301,12 +304,73 @@ class Company
 
     /**
      * @param string $phone
-     * @return Company
      */
-    public function setPhone(string $phone): Company
+    public function setPhone(string $phone): void
     {
         $this->phone = $phone;
-        return $this;
     }
 
+    /**
+     * @return \DateTime
+     */
+    public function getStartDate(): ?\DateTime
+    {
+        return $this->startDate;
+    }
+
+    /**
+     * @param \DateTime $startDate
+     */
+    public function setStartDate(?\DateTime $startDate): void
+    {
+        $this->startDate = $startDate;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDiscount(): bool
+    {
+        return $this->discount;
+    }
+
+    /**
+     * @param bool $discount
+     */
+    public function setDiscount(bool $discount): void
+    {
+        $this->discount = $discount;
+    }
+
+    /**
+     * @return User
+     */
+    public function getOwner(): User
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param User $owner
+     */
+    public function setOwner(User $owner): void
+    {
+        $this->owner = $owner;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSicknessPayer(): bool
+    {
+        return $this->sicknessPayer;
+    }
+
+    /**
+     * @param bool $sicknessPayer
+     */
+    public function setSicknessPayer(bool $sicknessPayer): void
+    {
+        $this->sicknessPayer = $sicknessPayer;
+    }
 }

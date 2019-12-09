@@ -40,29 +40,16 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @var \DateTime
-     * @ORM\Column(type="date", name="start_date", nullable=true)
+     * @var string
+     * @ORM\Column(type="string", length=64, unique=true)
      */
-    private $startDate;
+    private $firstName;
 
     /**
-     * @var boolean
-     * @ORM\Column(type="boolean")
+     * @var string
+     * @ORM\Column(type="string", length=128, unique=true)
      */
-    private $discount;
-
-    /**
-     * @var boolean
-     * @ORM\Column(type="boolean")
-     */
-    private $sicknessPayer;
-
-    /**
-     * @var Company
-     * @ORM\OneToOne(targetEntity="Company")
-     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
-     */
-    private $company;
+    private $lastName;
 
     /**
      * @var boolean
@@ -73,17 +60,14 @@ class User implements UserInterface, \Serializable
     /**
      * Many Users have Many Documents.
      * @ORM\ManyToMany(targetEntity="Document", inversedBy="viewers", cascade={"persist"})
-     * @ORM\JoinTable(name="document_user")
      */
     private $documents;
 
     public function __construct()
     {
         $this->isActive = true;
-        $this->discount = false;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
-        $this->sicknessPayer = false;
         $this->documents = new ArrayCollection();
     }
 
@@ -147,12 +131,10 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param string $id
-     * @return User
      */
-    public function setId(string $id): User
+    public function setId(string $id): void
     {
         $this->id = $id;
-        return $this;
     }
 
     /**
@@ -165,66 +147,10 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param string $email
-     * @return User
      */
-    public function setEmail(string $email): User
+    public function setEmail(string $email): void
     {
         $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getStartDate(): ?\DateTime
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * @param \DateTime $startDate
-     * @return User
-     */
-    public function setStartDate(?\DateTime $startDate): User
-    {
-        $this->startDate = $startDate;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isDiscount(): bool
-    {
-        return $this->discount;
-    }
-
-    /**
-     * @param bool $discount
-     * @return User
-     */
-    public function setDiscount(bool $discount): User
-    {
-        $this->discount = $discount;
-        return $this;
-    }
-
-    /**
-     * @return Company
-     */
-    public function getCompany(): Company
-    {
-        return $this->company;
-    }
-
-    /**
-     * @param Company $company
-     * @return User
-     */
-    public function setCompany(Company $company): User
-    {
-        $this->company = $company;
-        return $this;
     }
 
     /**
@@ -237,50 +163,26 @@ class User implements UserInterface, \Serializable
 
     /**
      * @param bool $isActive
-     * @return User
      */
-    public function setIsActive(bool $isActive): User
+    public function setIsActive(bool $isActive): void
     {
         $this->isActive = $isActive;
-        return $this;
     }
 
     /**
      * @param string $username
-     * @return User
      */
-    public function setUsername(string $username): User
+    public function setUsername(string $username): void
     {
         $this->username = $username;
-        return $this;
     }
 
     /**
      * @param string $password
-     * @return User
      */
-    public function setPassword(string $password): User
+    public function setPassword(string $password): void
     {
         $this->password = $password;
-        return $this;
-    }
-
-    /**
-     * @return bool
-     */
-    public function isSicknessPayer(): bool
-    {
-        return $this->sicknessPayer;
-    }
-
-    /**
-     * @param bool $sicknessPayer
-     * @return User
-     */
-    public function setSicknessPayer(bool $sicknessPayer): User
-    {
-        $this->sicknessPayer = $sicknessPayer;
-        return $this;
     }
 
     /**
@@ -292,15 +194,57 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param Collection $documents
      */
     public function setDocuments(Collection $documents): void
     {
         $this->documents = $documents;
     }
 
+    /**
+     * @return string
+     */
+    public function getFirstName(): string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     */
+    public function setFirstName(string $firstName): void
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName(): string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @var string $lastName
+     */
+    public function setLastName(string $lastName): void
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName(): string
+    {
+        return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return $this->getUsername();
+        return $this->getFullName();
     }
+
 }

@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -65,8 +66,7 @@ class DocumentType extends AbstractType
                 'data-minlength' => 2,
                 'data-maxlength' => 40,
             ]])
-            ->add('net', null, ['label' => 'Netto', 'attr' => [
-                'step' => '0.01',
+            ->add('net', TextType::class, ['label' => 'Netto', 'attr' => [
                 'data-required' => true,
                 'data-regex' => 'price',
             ]])
@@ -74,13 +74,11 @@ class DocumentType extends AbstractType
                 'data-required' => true,
                 'data-regex' => 'number',
             ]])
-            ->add('tax', null, ['label' => 'Podatek', 'attr' => [
-                'step' => '0.01',
+            ->add('tax', TextType::class, ['label' => 'Podatek', 'attr' => [
                 'data-required' => true,
                 'data-regex' => 'price',
             ]])
-            ->add('gross', null, ['label' => 'Brutto', 'attr' => [
-                'step' => '0.01',
+            ->add('gross', TextType::class, ['label' => 'Brutto', 'attr' => [
                 'data-required' => true,
                 'data-regex' => 'price',
             ]])

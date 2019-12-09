@@ -11,8 +11,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class DocumentFixtures extends Fixture implements DependentFixtureInterface
 {
-    private $passwordEncoder;
-
     public function load(ObjectManager $manager)
     {
         $document = new Document();
