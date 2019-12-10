@@ -10,13 +10,15 @@
         <section>
         {% for document in documents %}
             <div class="anchor document element">
+                <div class="date">{{ document.issueDate|date('d.m.Y') }}</div>
+                <a href="{{ path('show_document', {'id': document.id}) }}">
+                    <div class="title">{{ document.title }}</div>
+                    <div class="value">{{ document.gross|price }}</div>
+                </a>
                 <div class="menu">
                     <a href="{{ path('edit_document', {'id': document.id}) }}"><i class="material-icons">edit</i></a>
                     <a href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
                 </div>
-                <a href="{{ path('show_document', {'id': document.id}) }}">
-                    <span class="date">{{ document.issueDate|date('d.m.Y') }}</span>{{ document.title }}<span class="value right">{{ document.gross|price }}</span>
-                </a>
             </div>
         {% endfor %}
         </section>

@@ -17,6 +17,26 @@ class Document
     const PROFIT_TYPE = 1;
     const COST_TYPE = 2;
 
+    const VAT_INVOICE_CATEGORY_TEXT = 'Faktura VAT';
+    const MARGIN_INVOICE_CATEGORY_TEXT = 'Faktura VAT marża';
+    const AMORTIZATION_CATEGORY_TEXT = 'Amortyzacja';
+    const OTHER_CATEGORY_TEXT = 'Inny dokument';
+
+    const TRANSFER_PAYMENT_TYPE_TEXT = 'Przelew';
+    const CASH_PAYMENT_TYPE_TEXT = 'Gotówka';
+
+    const CATEGORIES = [
+        0 => self::OTHER_CATEGORY_TEXT,
+        1 => self::VAT_INVOICE_CATEGORY_TEXT,
+        2 => self::MARGIN_INVOICE_CATEGORY_TEXT,
+        3 => self::AMORTIZATION_CATEGORY_TEXT,
+    ];
+
+    const PAYMENT_TYPES = [
+        1 => self::TRANSFER_PAYMENT_TYPE_TEXT,
+        2 => self::CASH_PAYMENT_TYPE_TEXT,
+    ];
+
     use SoftDeleteable;
 
     /**
@@ -75,16 +95,22 @@ class Document
     private $number;
 
     /**
+     * @ORM\Column(type="integer", nullable=false)
+     * @var integer
+     */
+    private $paymentType;
+
+    /**
      * @ORM\Column(type="string", length=60, nullable=true)
      * @var string
-     * @Assert\NotBlank(message="Numer konta jest wymagany")
-     * @Assert\Length(
-     *      min = 26,
-     *      max = 26,
-     *      exactMessage="Numer konta musi mieć dokładnie {{ limit }} znaków"
-     * )
      */
     private $accountNumber;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Position", mappedBy="document")
+     * @var Collection
+     */
+    private $positions;
 
     /**
      * @ORM\ManyToOne(targetEntity="Company")
@@ -161,6 +187,7 @@ class Document
 
     public function __construct()
     {
+        $this->paymentType = 1;
         $this->issueDate = new \DateTime();
         $this->paymentDate = new \DateTime();
         $this->description = '';
@@ -209,6 +236,14 @@ class Document
     public function getCategory(): ?int
     {
         return $this->category;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategoryText(): string
+    {
+        return self::CATEGORIES[$this->getCategory()];
     }
 
     /**
@@ -276,6 +311,30 @@ class Document
     }
 
     /**
+     * @return int
+     */
+    public function getPaymentType(): int
+    {
+        return $this->paymentType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPaymentTypeText(): string
+    {
+        return self::PAYMENT_TYPES[$this->getPaymentType()];
+    }
+
+    /**
+     * @param int $paymentType
+     */
+    public function setPaymentType(int $paymentType): void
+    {
+        $this->paymentType = $paymentType;
+    }
+
+    /**
      * @return string
      */
     public function getAccountNumber(): ?string
@@ -291,6 +350,30 @@ class Document
     {
         $this->accountNumber = $accountNumber;
         return $this;
+    }
+
+    /**
+     * @return Collection|Position[]
+     */
+    public function getPositions(): Collection
+    {
+        return $this->positions;
+    }
+
+    /**
+     * @param Collection|Position[] $positions
+     */
+    public function setPositions(Collection $positions): void
+    {
+        $this->positions = $positions;
+    }
+
+    /**
+     * @param Position $position
+     */
+    public function addPosition(Position $position): void
+    {
+        $this->positions->add($position);
     }
 
     /**

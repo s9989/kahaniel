@@ -1,70 +1,82 @@
 {% extends 'document/base.html.twig' %}
 
-{% block title %}{{ document.title }}{% endblock %}
+{% block title %}{{ document.categoryText }} {{ document.number }} - {{ parent() }}{% endblock %}
 
 {% block body %}
-<section>
-    <div>
-        <div class="cf fieldset">
-            <div class="left label">Tytuł</div>
-            <div class="right value">{{ document.title }}</div>
+<div class="single_document">
+    <div class="section header">
+        <h1>{{ document.categoryText }} {{ document.number }}</h1>
+        <div class="date">Data wystawienia: {{ document.issueDate|date('d.m.Y') }}</div>
+        <div class="place">Miejsce wystawienia: {{ document.place }}</div>
+    </div>
+    <div class="section ownership">
+        <div class="seller">
+            <div class="title">Sprzedawca</div>
+            <div class="name">{{ document.seller.name }}</div>
+            <div class="address1">{{ document.seller.addressLine1 }}</div>
+            <div class="address2">{{ document.seller.addressLine2 }}</div>
+            <div class="tax_id">{{ document.seller.nip }}</div>
         </div>
-        <div class="cf fieldset">
-            <div class="left label">Typ</div>
-            <div class="right value">{{ document.type }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Kategoria</div>
-            <div class="right value">{{ document.category }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Opis</div>
-            <div class="right value">{{ document.description }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Numer</div>
-            <div class="right value">{{ document.number }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Numer konta</div>
-            <div class="right value">{{ document.accountNumber }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Kupujący</div>
-            <div class="right value">{{ document.buyer }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Sprzedający</div>
-            <div class="right value">{{ document.seller }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Data wystawienia</div>
-            <div class="right value">{{ document.issueDate|date('d.m.Y') }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Data płatności</div>
-            <div class="right value">{{ document.paymentDate|date('d.m.Y') }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Miejsce</div>
-            <div class="right value">{{ document.place }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Netto</div>
-            <div class="right value">{{ document.net }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Procent podatku</div>
-            <div class="right value">{{ document.taxPercent }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Podatek</div>
-            <div class="right value">{{ document.tax }}</div>
-        </div>
-        <div class="cf fieldset">
-            <div class="left label">Brutto</div>
-            <div class="right value">{{ document.gross }}</div>
+        <div class="buyer">
+            <div class="title">Nabywca</div>
+            <div class="name">{{ document.buyer.name }}</div>
+            <div class="address1">{{ document.buyer.addressLine1 }}</div>
+            <div class="address2">{{ document.buyer.addressLine2 }}</div>
+            <div class="tax_id">{{ document.buyer.nip }}</div>
         </div>
     </div>
-</section>
+    <div class="section positions">
+
+    </div>
+    <div class="section details">
+        <div class="payment_details">
+            <div class="payment_type">
+                <span class="label">Forma zapłaty:</span>
+                <span class="value">{{ document.paymentTypeText }}</span>
+            </div>
+            <div class="payment_date">
+                <span class="label">Termin zapłaty:</span>
+                <span class="value">{{ document.paymentDate|date("d.m.Y") }}</span>
+            </div>
+            {% if document.accountNumber %}
+            <div class="bank">
+                <span class="label">Bank:</span>
+                <span class="value">{{ document.accountNumber|bank }}</span>
+            </div>
+            {%  endif %}
+            {% if document.accountNumber %}
+            <div class="account_number">
+                <span class="label">Numer konta:</span>
+                <span class="value">{{ document.accountNumber|account_number }}</span>
+            </div>
+            {%  endif %}
+        </div>
+        <div class="payment_values">
+            <div class="total">
+                <span class="label">Razem:</span>
+                <span class="value">{{ document.gross|price }}</span>
+            </div>
+            <div class="received">
+                <span class="label">Płatność otrzymana:</span>
+                <span class="value">{{ 0|price }}</span>
+            </div>
+            <div class="remain">
+                <span class="label">Do zapłaty:</span>
+                <span class="value">{{ document.gross|price }}</span>
+            </div>
+            <div class="to_pay">
+                <span class="label">Słownie do zapłaty:</span>
+                <span class="value">{{ document.gross|literal }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="section signatures">
+        <div class="seller_signature">
+            Osoba upoważniona do wystawienia
+        </div>
+        <div class="buyer_signature">
+            Osoba upoważniona do odbioru
+        </div>
+    </div>
+</div>
 {% endblock %}

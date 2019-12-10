@@ -37,6 +37,10 @@ class DocumentType extends AbstractType
                 'data-minlength' => 4,
                 'data-maxlength' => 40,
             ]])
+            ->add('paymentType',  ChoiceType::class, ['label' => 'Typ płatności', 'choices' => [
+                'Przelew' => 1,
+                'Gotówka' => 2,
+            ]])
             ->add('accountNumber', null, ['label' => 'Numer konta', 'attr' => [
                 'data-regex' => 'account_number',
                 'data-maxlength' => 60,

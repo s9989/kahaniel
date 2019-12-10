@@ -201,6 +201,32 @@ class Company
     /**
      * @return string
      */
+    public function getAddressLine1()
+    {
+        return $this->getApartamentNumber()
+            ? sprintf("%s %s m. %s", $this->getStreet(), $this->getHouseNumber(), $this->getApartamentNumber())
+            : sprintf("%s %s", $this->getStreet(), $this->getHouseNumber());
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressLine2()
+    {
+        return sprintf("%s %s", $this->getPostCode(), $this->getCity());
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddress()
+    {
+        return sprintf("%s, %s", $this->getAddressLine1(), $this->getAddressLine2());
+    }
+
+    /**
+     * @return string
+     */
     public function getStreet(): ?string
     {
         return $this->street;
