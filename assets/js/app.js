@@ -15,7 +15,7 @@ $(document).ready(function() {
 
     let hammertime = new Hammer.Manager(myElement);
 
-    hammertime.add( new Hammer.Swipe({ direction: Hammer.DIRECTION_ALL }) );
+    hammertime.add( new Hammer.Swipe({ direction: Hammer.DIRECTION_HORIZONTAL }) );
     // hammertime.add( new Hammer.Tap({ event: 'doubletap', taps: 2 }) );
     // hammertime.add( new Hammer.Tap({ event: 'singletap' }) );
     // hammertime.get('doubletap').recognizeWith('singletap');
