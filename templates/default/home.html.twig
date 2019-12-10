@@ -3,7 +3,7 @@
 {% block body %}
     <section>
         <div>
-            <h1>Witaj {{ user.username }}!</h1>
+            <h1>Witaj {{ user.fullname }}!</h1>
         </div>
     </section>
     {% if user.documents is not empty %}

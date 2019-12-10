@@ -8,15 +8,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class WelcomeController extends AbstractController
 {
     /**
-     * @Route("/", name="welcome")
+     * @Route("/welcome", name="welcome")
      */
-    public function index()
+    public function welcome()
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('home');
         }
 
         return $this->render('welcome/index.html.twig', []);
+    }
+
+    /**
+     * @Route("/", name="start")
+     */
+    public function start()
+    {
+        return $this->redirectToRoute('welcome');
     }
 
 }

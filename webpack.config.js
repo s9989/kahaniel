@@ -23,7 +23,6 @@ Encore
     .addStyleEntry('css/common', './assets/scss/common.scss')
     .addStyleEntry('css/app', './assets/scss/app.scss')
     .addStyleEntry('css/welcome', './assets/scss/welcome.scss')
-    .addStyleEntry('css/login', './assets/scss/login.scss')
 
     // uncomment if you use Sass/SCSS files
     .enableSassLoader()

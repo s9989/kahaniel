@@ -1,22 +1,31 @@
 {% extends 'empty.html.twig' %}
 
-{% block title %}Logowanie{% endblock %}
-
-{% block stylesheets %}
-    {{ encore_entry_link_tags('css/login') }}
-{% endblock %}
+{% block title %}Logowanie - {{ parent() }}{% endblock %}
 
 {% block javascripts %}
     {{ encore_entry_script_tags('js/login') }}
 {% endblock %}
 
 {% block body %}
-    <form action="{{ path('login') }}" method="post" class="login{% if not error %} enter{% endif %}">
-        {% if error %}
-            <div class="error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-        <input placeholder="login" type="text" id="username" name="_username" value="{{ last_username }}" autofocus>
-        <input placeholder="hasło" type="password" id="password" name="_password">
-        <input class="button" type="submit" value="Zaloguj">
-    </form>
+    <section>
+        <form action="{{ path('login') }}" method="post" class="login{% if not error %} enter{% endif %}">
+            {% if error %}
+                <div class="general-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+            <div class="fieldset">
+                <input placeholder="login" type="text" id="username" name="_username" value="{{ last_username }}" autofocus>
+            </div>
+            <div class="fieldset">
+                <input placeholder="hasło" type="password" id="password" name="_password">
+            </div>
+            <div class="fieldset">
+                <input class="button" type="submit" value="Zaloguj">
+            </div>
+        </form>
+    </section>
+    <section>
+        <div class="actions">
+            <a class="default" href="{{ url('register') }}">Załóż konto</a>
+        </div>
+    </section>
 {% endblock %}

@@ -5,7 +5,9 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Table(name="app_users")
@@ -24,30 +26,35 @@ class User implements UserInterface, \Serializable
     /**
      * @var string
      * @ORM\Column(type="string", length=25, unique=true)
+     * @Assert\NotBlank
      */
     private $username;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=64)
+     * @Assert\NotBlank
      */
     private $password;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=254, unique=true)
+     * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=64, unique=true)
+     * @Assert\NotBlank
      */
     private $firstName;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=128, unique=true)
+     * @Assert\NotBlank
      */
     private $lastName;
 
@@ -65,7 +72,7 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
-        $this->isActive = true;
+        $this->isActive = false;
         // may not be needed, see section on salt below
         // $this->salt = md5(uniqid('', true));
         $this->documents = new ArrayCollection();
@@ -88,9 +95,17 @@ class User implements UserInterface, \Serializable
         return $this->password;
     }
 
+    /**
+     * @param UserPasswordEncoderInterface $encoder
+     */
+    public function hashPassword(UserPasswordEncoderInterface $encoder): void
+    {
+        $this->setPassword($encoder->encodePassword($this, $this->getPassword()));
+    }
+
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return ['ROLE_USER'];
     }
 
     public function eraseCredentials()
@@ -124,7 +139,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -140,7 +155,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -203,7 +218,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
@@ -218,7 +233,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
@@ -234,7 +249,7 @@ class User implements UserInterface, \Serializable
     /**
      * @return string
      */
-    public function getFullName(): string
+    public function getFullName(): ?string
     {
         return sprintf('%s %s', $this->getFirstName(), $this->getLastName());
     }
