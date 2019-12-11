@@ -30,6 +30,13 @@ class SocialInsuranceBase
     private $month;
 
     /**
+     * Przewidywalne wynagrodzenie
+     * @var integer
+     * @ORM\Column(type="integer", name="predicted_salary")
+     */
+    private $predictedSalary;
+
+    /**
      * Minimalne wynagrodzenie
      * @var integer
      * @ORM\Column(type="integer", name="minimal_salary")
@@ -130,6 +137,22 @@ class SocialInsuranceBase
     public function setMonth(int $month): void
     {
         $this->month = $month;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPredictedSalary(): int
+    {
+        return $this->predictedSalary;
+    }
+
+    /**
+     * @param int $predictedSalary
+     */
+    public function setPredictedSalary(int $predictedSalary): void
+    {
+        $this->predictedSalary = $predictedSalary;
     }
 
     /**

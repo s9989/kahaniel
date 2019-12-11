@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
+use Exception;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SocialInsurancePaymentRepository")
@@ -65,6 +67,18 @@ class SocialInsurancePayment
      * @ORM\Column(type="integer", nullable=false)
      */
     private $labor;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $month;
+
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $year;
 
     public function getId()
     {
@@ -197,5 +211,54 @@ class SocialInsurancePayment
     public function setLabor(int $labor): void
     {
         $this->labor = $labor;
+    }
+
+    /**
+     * @return DateTime
+     * @throws Exception
+     */
+    public function getDate(): DateTime
+    {
+        return new DateTime(sprintf("%s/%s/01", $this->getYear(), $this->getMonth()));
+    }
+
+    /**
+     * @return int
+     */
+    public function getTotal(): int
+    {
+        return $this->getRetirement() + $this->getOther() + $this->getAccident() + $this->getSickness() + $this->getHealth();
+    }
+
+    /**
+     * @return int
+     */
+    public function getMonth(): int
+    {
+        return $this->month;
+    }
+
+    /**
+     * @param int $month
+     */
+    public function setMonth(int $month): void
+    {
+        $this->month = $month;
+    }
+
+    /**
+     * @return int
+     */
+    public function getYear(): int
+    {
+        return $this->year;
+    }
+
+    /**
+     * @param int $year
+     */
+    public function setYear(int $year): void
+    {
+        $this->year = $year;
     }
 }

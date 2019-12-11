@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\SocialInsuranceBase;
+use App\Entity\Company;
+use App\Entity\SocialInsurancePayment;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -18,20 +19,12 @@ class SocialInsuranceController extends AbstractController
     {
         $em = $this->getDoctrine()->getManager();
 
-        $user = $this->getUser();
-
-        $bases = $em->getRepository(SocialInsuranceBase::class)->findByUser($user);
+        $company = $em->getRepository(Company::class)->findOneByOwner($this->getUser());
+        $payments = $em->getRepository(SocialInsurancePayment::class)->findByCompany($company);
 
         return $this->render('social_insurance/index.html.twig', [
-            'bases' => $bases,
+            'payments' => $payments,
         ]);
     }
 
-    /**
-     * @Route("/social_insurance_change", name="social_insurance_change")
-     */
-    public function action()
-    {
-        //@todo write code...
-    }
 }

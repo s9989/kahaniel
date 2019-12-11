@@ -40,8 +40,8 @@ class GenerateSocialInsuranceCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $month = $input->getArgument('month');
-        $year = $input->getArgument('year');
+        $month = $input->getArgument('month') ?: (new \DateTime())->format('m');
+        $year = $input->getArgument('year') ?: (new \DateTime())->format('Y');
 
         $base = $this->em->getRepository(SocialInsuranceBase::class)->findOneBy([
             'month' => $month,
@@ -56,28 +56,30 @@ class GenerateSocialInsuranceCommand extends Command
             $payment = new SocialInsurancePayment();
             $payment->setCompany($company);
             $payment->setSocialInsuranceBase($base);
+            $payment->setYear($base->getYear());
+            $payment->setMonth($base->getMonth());
 
-            if ($company->getStartDate() < new \DateTime("-2 year")) {
-                $socialBaseValue = floor($base->getAverageSalary() * 60 / 100);
-                $payment->setLabor(floor($socialBaseValue * $base->getLaborPercent() / 10000));
+            if ($company->getStartDate() < (new \DateTime(sprintf("%s/%s/01", $year, $month)))->modify("-2 year")) {
+                $socialBaseValue = round($base->getPredictedSalary() * 60 / 100);
+                $payment->setLabor(round($socialBaseValue * $base->getLaborPercent() / 10000));
             } else {
-                $socialBaseValue = floor($base->getMinimalSalary() * 30 / 100);
+                $socialBaseValue = round($base->getMinimalSalary() * 30 / 100);
                 $payment->setLabor(0);
             }
 
-            $payment->setRetirement($socialBaseValue * $base->getRetirementPercent() / 10000);
-            $payment->setOther($socialBaseValue * $base->getOtherPercent() / 10000);
-            $payment->setAccident($socialBaseValue * $base->getAccidentPercent() / 10000);
+            $payment->setRetirement(round($socialBaseValue * $base->getRetirementPercent() / 10000));
+            $payment->setOther(round($socialBaseValue * $base->getOtherPercent() / 10000));
+            $payment->setAccident(round($socialBaseValue * $base->getAccidentPercent() / 10000));
 
             if ($company->isSicknessPayer()) {
-                $payment->setSickness($socialBaseValue * $base->getSicknessPercent() / 10000);
+                $payment->setSickness(round($socialBaseValue * $base->getSicknessPercent() / 10000));
             } else {
                 $payment->setSickness(0);
             }
 
-            $healthBaseValue = floor($base->getAverageSalary() * 75 / 100);
+            $healthBaseValue = round($base->getAverageSalary() * 75 / 100);
 
-            $payment->setHealth($healthBaseValue * $base->getHealthPercent());
+            $payment->setHealth(round($healthBaseValue * $base->getHealthPercent() / 10000));
 
             $this->em->persist($payment);
         }

@@ -18,33 +18,4 @@ class SocialInsurancePaymentRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, SocialInsurancePayment::class);
     }
-
-//    /**
-//     * @return SocialInsurancePayment[] Returns an array of SocialInsurancePayment objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?SocialInsurancePayment
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

@@ -2,21 +2,19 @@
 
 {% block title %}ZUS{% endblock %}
 
-{% block body_class %}{% if bases|length == 0 %}empty{% endif %}{% endblock %}
+{% block body_class %}{% if payments|length == 0 %}empty{% endif %}{% endblock %}
+
+{% block current %}ZUS{% endblock %}
+{% block head %}{% if payments|length != 0 %}<h2>ZUS</h2>{% endif %}{% endblock %}
 
 {% block body %}
-    {% for base in bases %}
-        <div class="caption">{{ base.fullMonth }}</div>
-        <section class="last">
-                <div class="anchor social_insurance element">
-                    <div class="menu">
-                        <a href="{{ path('social_insurance_change', {'id': base.id, 'action': 'pay'}) }}"><i class="material-icons">attach_money</i></a>
-                        <a href="{{ path('social_insurance_change', {'id': base.id, 'action': 'undo_payment'}) }}"><i class="material-icons">money_off</i></a>
-                    </div>
-                    <a href="#">
-                        <span class="date">{{ base.minimalSalary|price  }}</span>{{ base.averageSalary|price  }}<span class="value right"></span>
-                    </a>
-                </div>
-        </section>
+    <section>
+    {% for payment in payments %}
+        <div class="anchor payment element">
+            <div class="date">{{ payment.date|localizeddate('none', 'none', app.request.locale, null, 'LLLL, Y')|capitalize }}</div>
+            <div class="title">ZUS</div>
+            <div class="value">{{ payment.total|price }}</div>
+        </div>
     {% endfor %}
+    </section>
 {% endblock %}

@@ -213,6 +213,14 @@ header + .content {
             border-top: solid 1px #ddd;
         }
 
+        &.vat {
+            border-left: solid 2px #6586f3;
+        }
+
+        &.pit {
+            border-left: solid 2px #f3a45c;
+        }
+
         &.cost {
             border-left: solid 2px #f38f86;
         }
@@ -224,6 +232,20 @@ header + .content {
         & > .date {
             padding: 20px;
             color: #999999;
+        }
+
+        &.payment {
+            .date {
+                width: 110px;
+                text-align: right;
+            }
+            .title {
+                flex-grow: 100;
+                text-align: left;
+            }
+            .value {
+                padding: 20px;
+            }
         }
 
         & > a {

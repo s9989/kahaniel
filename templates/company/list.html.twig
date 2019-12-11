@@ -4,9 +4,8 @@
 
 {% block body_class %}{% if companies|length == 0 %}empty{% endif %}{% endblock %}
 
-{% block head %}
-    <h2>Kontrahenci</h2>
-{% endblock %}
+{% block current %}Kontrahenci{% endblock %}
+{% block head %}{% if companies|length != 0 %}<h2>Kontrahenci</h2>{% endif %}{% endblock %}
 
 {% block body %}
     <section>

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Entity\Document;
 use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
@@ -120,7 +121,8 @@ class DocumentController extends AbstractController
     public function list()
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $documents = $entityManager->getRepository(Document::class)->findAll();
+        $company = $entityManager->getRepository(Company::class)->findOneByOwner($this->getUser());
+        $documents = $entityManager->getRepository(Document::class)->getByCompany($company);
 
         return $this->render('document/list.html.twig', [
             'collection' => DocumentRepository::groupByMonth($documents),

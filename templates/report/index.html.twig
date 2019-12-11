@@ -2,26 +2,19 @@
 
 {% block title %}Raporty{% endblock %}
 
-{% block head %}
-    <h2>Raporty</h2>
-{% endblock %}
+{% block body_class %}{% if payments|length == 0 %}empty{% endif %}{% endblock %}
+
+{% block current %}Płatności{% endblock %}
+{% block head %}{% if payments|length != 0 %}<h2>Płatności</h2>{% endif %}{% endblock %}
 
 {% block body %}
-    {% for report in reports %}
-        <div class="caption">{{ report.fullMonth|localizeddate('none', 'none', app.request.locale, null, 'LLLL, Y')|capitalize }}</div>
-        <section class="last">
-                <div class="anchor social_insurance element">
-                    <div class="menu">
-                    </div>
-                    <a href="#">
-                        {% if report.profits is defined %}
-                        <div>VAT-7: {{ (report.profits_tax - report.costs_tax)|price }}<span class="value right"></span></div>
-                        {% endif %}
-                        {% if report.costs is defined %}
-                        <div>PIT: {{ ((report.profits_tax - report.costs_tax)*19/100)|price }}<span class="value right"></span></div>
-                        {% endif %}
-                    </a>
-                </div>
-        </section>
-    {% endfor %}
+    <section>
+        {% for payment in payments %}
+            <div class="anchor payment element {{ payment.type == 1 ? 'vat' : 'pit' }}">
+                <div class="date">{{ payment.date|localizeddate('none', 'none', app.request.locale, null, 'LLLL, Y')|capitalize }}</div>
+                <div class="title">{{ payment.typeText }}</div>
+                <div class="value">{{ payment.total|price }}</div>
+            </div>
+        {% endfor %}
+    </section>
 {% endblock %}

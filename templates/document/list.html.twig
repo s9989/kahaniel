@@ -4,9 +4,8 @@
 
 {% block body_class %}{% if collection|length == 0 %}empty{% endif %}{% endblock %}
 
-{% block head %}
-    <h2>Dokumenty</h2>
-{% endblock %}
+{% block current %}Dokumenty{% endblock %}
+{% block head %}{% if collection|length != 0 %}<h2>Dokumenty</h2>{% endif %}{% endblock %}
 
 {% block body %}
     {% for month, documents in collection %}
