@@ -181,7 +181,7 @@ class Document
 
     /**
      * Many Users have Many Documents.
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="documents", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="User", mappedBy="documents", cascade={"persist"})
      */
     private $viewers;
 
@@ -323,6 +323,10 @@ class Document
      */
     public function getPaymentTypeText(): string
     {
+        if (!array_key_exists($this->getPaymentType(), self::PAYMENT_TYPES)) {
+            return '';
+        }
+
         return self::PAYMENT_TYPES[$this->getPaymentType()];
     }
 

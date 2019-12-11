@@ -17,15 +17,15 @@ class SocialInsurancePayment
     private $id;
 
     /**
-     * @var User
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @var Company
+     * @ORM\ManyToOne(targetEntity="Company")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id")
      */
-    private $user;
+    private $company;
 
     /**
      * @var SocialInsuranceBase
-     * @ORM\OneToOne(targetEntity="SocialInsuranceBase")
+     * @ORM\ManyToOne(targetEntity="SocialInsuranceBase")
      * @ORM\JoinColumn(name="social_insurance_base_id", referencedColumnName="id")
      */
     private $socialInsuranceBase;
@@ -60,28 +60,15 @@ class SocialInsurancePayment
      */
     private $health;
 
+    /**
+     * @var integer
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $labor;
 
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * @return User
-     */
-    public function getUser(): User
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param User $user
-     * @return SocialInsurancePayment
-     */
-    public function setUser(User $user): SocialInsurancePayment
-    {
-        $this->user = $user;
-        return $this;
     }
 
     /**
@@ -94,12 +81,10 @@ class SocialInsurancePayment
 
     /**
      * @param SocialInsuranceBase $socialInsuranceBase
-     * @return SocialInsurancePayment
      */
-    public function setSocialInsuranceBase(SocialInsuranceBase $socialInsuranceBase): SocialInsurancePayment
+    public function setSocialInsuranceBase(SocialInsuranceBase $socialInsuranceBase): void
     {
         $this->socialInsuranceBase = $socialInsuranceBase;
-        return $this;
     }
 
     /**
@@ -112,12 +97,10 @@ class SocialInsurancePayment
 
     /**
      * @param int $other
-     * @return SocialInsurancePayment
      */
-    public function setOther(int $other): SocialInsurancePayment
+    public function setOther(int $other): void
     {
         $this->other = $other;
-        return $this;
     }
 
     /**
@@ -130,12 +113,10 @@ class SocialInsurancePayment
 
     /**
      * @param int $retirement
-     * @return SocialInsurancePayment
      */
-    public function setRetirement(int $retirement): SocialInsurancePayment
+    public function setRetirement(int $retirement): void
     {
         $this->retirement = $retirement;
-        return $this;
     }
 
     /**
@@ -148,12 +129,10 @@ class SocialInsurancePayment
 
     /**
      * @param int $sickness
-     * @return SocialInsurancePayment
      */
-    public function setSickness(int $sickness): SocialInsurancePayment
+    public function setSickness(int $sickness): void
     {
         $this->sickness = $sickness;
-        return $this;
     }
 
     /**
@@ -166,12 +145,10 @@ class SocialInsurancePayment
 
     /**
      * @param int $accident
-     * @return SocialInsurancePayment
      */
-    public function setAccident(int $accident): SocialInsurancePayment
+    public function setAccident(int $accident): void
     {
         $this->accident = $accident;
-        return $this;
     }
 
     /**
@@ -184,11 +161,41 @@ class SocialInsurancePayment
 
     /**
      * @param int $health
-     * @return SocialInsurancePayment
      */
-    public function setHealth(int $health): SocialInsurancePayment
+    public function setHealth(int $health): void
     {
         $this->health = $health;
-        return $this;
+    }
+
+    /**
+     * @return Company
+     */
+    public function getCompany(): Company
+    {
+        return $this->company;
+    }
+
+    /**
+     * @param Company $company
+     */
+    public function setCompany(Company $company): void
+    {
+        $this->company = $company;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLabor(): int
+    {
+        return $this->labor;
+    }
+
+    /**
+     * @param int $labor
+     */
+    public function setLabor(int $labor): void
+    {
+        $this->labor = $labor;
     }
 }

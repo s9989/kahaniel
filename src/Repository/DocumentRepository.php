@@ -27,7 +27,7 @@ class DocumentRepository extends ServiceEntityRepository
         $grouped = [];
         foreach ($collection as $document) {
             $date = $document->getIssueDate();
-            $m = $date->format('U');
+            $m = (new \DateTime($date->format('Y/m/01')))->format('U');
             $grouped[$m][] = $document;
         }
         return $grouped;

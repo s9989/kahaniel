@@ -1,6 +1,6 @@
-{% extends 'document/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block title %}New document{% endblock %}
+{% block title %}Nowy dokument - {{ parent() }}{% endblock %}
 
 {% form_theme form _self %}
 
@@ -28,6 +28,14 @@
         {{- form_help(form) -}}
     </div>
 {%- endblock form_row -%}
+
+{% block head %}
+    <nav>
+        <div class="lefty">
+            <a href="{{ url('documents') }}"><i class="material-icons">arrow_back</i></a>
+        </div>
+    </nav>
+{% endblock %}
 
 {% block body %}
 <section>

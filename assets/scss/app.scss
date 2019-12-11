@@ -50,6 +50,34 @@ header {
     }
 }
 
+.wrapper .head {
+    margin: 0 20px;
+
+    h2 {
+        margin-bottom: 15px;
+    }
+
+    nav {
+        margin-bottom: 10px;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+
+        a {
+            padding: 0 4px;
+        }
+
+        .material-icons {
+            color: #b1b1b1;
+
+            &:hover {
+                color: #444;
+            }
+        }
+    }
+}
 
 .wrapper {
     max-width: 1200px;
@@ -185,15 +213,24 @@ header + .content {
             border-top: solid 1px #ddd;
         }
 
+        &.cost {
+            border-left: solid 2px #f38f86;
+        }
+
+        &.profit {
+            border-left: solid 2px #88b157;
+        }
+
         & > .date {
             padding: 20px;
             color: #999999;
         }
 
         & > a {
+            flex-grow: 10;
             padding: 20px;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
         }
 
         .menu {
@@ -206,6 +243,9 @@ header + .content {
 
                 .material-icons {
                     color: #bdbdbd;
+                    &:hover {
+                        color: #828282;
+                    }
                 }
             }
         }
@@ -263,7 +303,7 @@ form {
         }
 
         & > input + span {
-            font-family: Roboto;
+            font-family: 'Roboto', sans-serif;
             font-size: 12px;
             padding: 3px 0 0;
             color: red;
@@ -296,7 +336,16 @@ form {
         }
 
         [type="submit"] {
-
+            padding: 10px;
+            background-color: #4285f4;
+            color: white;
+            border: solid 1px #ddd;
+            cursor: pointer;
+            &:hover {
+                transition: background-color 0.5s ease;
+                background-color: #2a72cc;
+                color: white;
+            }
         }
     }
 }

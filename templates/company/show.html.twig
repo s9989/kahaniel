@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ company.name }} - {{ parent() }}{% endblock %}
+
+{% block head %}
+    <nav>
+        <div class="lefty">
+            <a href="{{ url('companies') }}"><i class="material-icons">arrow_back</i></a>
+        </div>
+        <div class="righty">
+            <a href="{{ path('edit_company', {'id': company.id}) }}"><i class="material-icons">edit</i></a>
+            <a href="{{ path('delete_company', {'id': company.id}) }}"><i class="material-icons">delete</i></a>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+<div class="single_company">
+    {{ company.name }}
+</div>
+{% endblock %}

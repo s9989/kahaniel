@@ -30,51 +30,60 @@ class SocialInsuranceBase
     private $month;
 
     /**
+     * Minimalne wynagrodzenie
      * @var integer
      * @ORM\Column(type="integer", name="minimal_salary")
      */
     private $minimalSalary;
 
     /**
+     * Przeciętne wynagrodzenie
      * @var integer
      * @ORM\Column(type="integer", name="average_salary")
      */
     private $averageSalary;
 
     /**
-     * Other Pension Insurance Contribution Percent
+     * Ubezpieczenie rentowe
      * @var integer
      * @ORM\Column(type="integer", name="other_percent")
      */
     private $otherPercent;
 
     /**
-     * Retirement Pension Insurance Contribution Percent
+     * Ubezpieczenie emerytalne
      * @var integer
      * @ORM\Column(type="integer", name="retirement_percent")
      */
     private $retirementPercent;
 
     /**
-     * Sickness Insurance Contribution Percent
+     * Ubezpieczenie chorobowe
      * @var integer
      * @ORM\Column(type="integer", name="sickness_percent")
      */
     private $sicknessPercent;
 
     /**
-     * Accident Insurance Contribution Percent
+     * Ubezpieczenie wypadkowe
      * @var integer
      * @ORM\Column(type="integer", name="accident_percent")
      */
     private $accidentPercent;
 
     /**
-     * Health Insurance Contribution Percent
+     * Ubezpieczenie zdrowotne
      * @var integer
      * @ORM\Column(type="integer", name="health_percent")
      */
     private $healthPercent;
+
+    /**
+     * Fundusz pracy
+     * @var integer
+     * @ORM\Column(type="integer", name="labor_percent")
+     */
+    private $laborPercent;
 
     public function getId()
     {
@@ -91,12 +100,10 @@ class SocialInsuranceBase
 
     /**
      * @param int $year
-     * @return SocialInsuranceBase
      */
-    public function setYear(int $year): SocialInsuranceBase
+    public function setYear(int $year): void
     {
         $this->year = $year;
-        return $this;
     }
 
     /**
@@ -119,12 +126,10 @@ class SocialInsuranceBase
 
     /**
      * @param int $month
-     * @return SocialInsuranceBase
      */
-    public function setMonth(int $month): SocialInsuranceBase
+    public function setMonth(int $month): void
     {
         $this->month = $month;
-        return $this;
     }
 
     /**
@@ -137,12 +142,10 @@ class SocialInsuranceBase
 
     /**
      * @param int $minimalSalary
-     * @return SocialInsuranceBase
      */
-    public function setMinimalSalary(int $minimalSalary): SocialInsuranceBase
+    public function setMinimalSalary(int $minimalSalary): void
     {
         $this->minimalSalary = $minimalSalary;
-        return $this;
     }
 
     /**
@@ -155,12 +158,10 @@ class SocialInsuranceBase
 
     /**
      * @param int $averageSalary
-     * @return SocialInsuranceBase
      */
-    public function setAverageSalary(int $averageSalary): SocialInsuranceBase
+    public function setAverageSalary(int $averageSalary): void
     {
         $this->averageSalary = $averageSalary;
-        return $this;
     }
 
     /**
@@ -173,12 +174,10 @@ class SocialInsuranceBase
 
     /**
      * @param int $otherPercent
-     * @return SocialInsuranceBase
      */
-    public function setOtherPercent(int $otherPercent): SocialInsuranceBase
+    public function setOtherPercent(int $otherPercent): void
     {
         $this->otherPercent = $otherPercent;
-        return $this;
     }
 
     /**
@@ -191,12 +190,10 @@ class SocialInsuranceBase
 
     /**
      * @param int $retirementPercent
-     * @return SocialInsuranceBase
      */
-    public function setRetirementPercent(int $retirementPercent): SocialInsuranceBase
+    public function setRetirementPercent(int $retirementPercent): void
     {
         $this->retirementPercent = $retirementPercent;
-        return $this;
     }
 
     /**
@@ -209,12 +206,10 @@ class SocialInsuranceBase
 
     /**
      * @param int $sicknessPercent
-     * @return SocialInsuranceBase
      */
-    public function setSicknessPercent(int $sicknessPercent): SocialInsuranceBase
+    public function setSicknessPercent(int $sicknessPercent): void
     {
         $this->sicknessPercent = $sicknessPercent;
-        return $this;
     }
 
     /**
@@ -227,12 +222,10 @@ class SocialInsuranceBase
 
     /**
      * @param int $accidentPercent
-     * @return SocialInsuranceBase
      */
-    public function setAccidentPercent(int $accidentPercent): SocialInsuranceBase
+    public function setAccidentPercent(int $accidentPercent): void
     {
         $this->accidentPercent = $accidentPercent;
-        return $this;
     }
 
     /**
@@ -245,11 +238,25 @@ class SocialInsuranceBase
 
     /**
      * @param int $healthPercent
-     * @return SocialInsuranceBase
      */
-    public function setHealthPercent(int $healthPercent): SocialInsuranceBase
+    public function setHealthPercent(int $healthPercent): void
     {
         $this->healthPercent = $healthPercent;
-        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLaborPercent(): int
+    {
+        return $this->laborPercent;
+    }
+
+    /**
+     * @param int $laborPercent
+     */
+    public function setLaborPercent(int $laborPercent): void
+    {
+        $this->laborPercent = $laborPercent;
     }
 }

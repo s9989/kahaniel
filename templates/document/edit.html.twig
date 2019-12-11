@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ document.categoryText }} {{ document.number }} - edycja - {{ parent() }}{% endblock %}
+
 {% form_theme form _self %}
 
 {%- block form_errors -%}
@@ -27,7 +29,17 @@
     </div>
 {%- endblock form_row -%}
 
-{% block title %}Edit document{% endblock %}
+{% block head %}
+    <nav>
+        <div class="lefty">
+            <a href="{{ url('documents') }}"><i class="material-icons">arrow_back</i></a>
+        </div>
+        <div class="righty">
+            <a href="{{ path('show_document', {'id': document.id}) }}"><i class="material-icons">visibility</i></a>
+            <a href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
+        </div>
+    </nav>
+{% endblock %}
 
 {% block body %}
     <section>

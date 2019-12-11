@@ -1,7 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edycja firmy{% endblock %}
+{% block title %}{{ company.name }} - edycja - {{ parent() }}{% endblock %}
 
+{% form_theme form _self %}
+
+{%- block form_errors -%}
+    <span class="error {% if errors|length > 0 %}visible{% endif %}">
+    {%- if errors|length > 0 -%}
+        <ul>
+            {%- for error in errors -%}
+                <li>{{ error.message }}</li>
+            {%- endfor -%}
+        </ul>
+    {%- endif -%}
+    </span>
+{%- endblock form_errors -%}
+
+{%- block form_row -%}
+    {%- set widget_attr = {} -%}
+    {%- if help is not empty -%}
+        {%- set widget_attr = {attr: {'aria-describedby': id ~"_help"}} -%}
+    {%- endif -%}
+    <div {% with {attr: row_attr|default({})} %}{{ block('attributes') }}{% endwith %}>
+        {{- form_label(form) -}}
+        {{- form_widget(form, widget_attr) -}}
+        {{- form_errors(form) -}}
+        {{- form_help(form) -}}
+    </div>
+{%- endblock form_row -%}
+
+{% block head %}
+    <nav>
+        <div class="lefty">
+            <a href="{{ url('companies') }}"><i class="material-icons">arrow_back</i></a>
+        </div>
+        <div class="righty">
+            <a href="{{ path('show_company', {'id': company.id}) }}"><i class="material-icons">visibility</i></a>
+            <a href="{{ path('delete_company', {'id': company.id}) }}"><i class="material-icons">delete</i></a>
+        </div>
+    </nav>
+{% endblock %}
 {% block body %}
     <section>
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}

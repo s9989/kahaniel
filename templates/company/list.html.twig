@@ -4,17 +4,19 @@
 
 {% block body_class %}{% if companies|length == 0 %}empty{% endif %}{% endblock %}
 
-{% block current %}Kontrahenci{% endblock %}
+{% block head %}
+    <h2>Kontrahenci</h2>
+{% endblock %}
 
 {% block body %}
     <section>
     {% for company in companies %}
         <div class="anchor">
+            <a href="{{ path('show_company', {'id': company.id}) }}">{{ company.name }}</a>
             <div class="menu">
                 <a href="{{ path('edit_company', {'id': company.id}) }}"><i class="material-icons">edit</i></a>
                 <a href="{{ path('delete_company', {'id': company.id}) }}"><i class="material-icons">delete</i></a>
             </div>
-            <a href="">{{ company.name }}</a>
         </div>
     {% endfor %}
     </section>

@@ -8,16 +8,40 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/panel")
+ * @Route("/panel/company")
  */
 class CompanyController extends AbstractController
 {
+
     /**
      * @param Request $request
-     * @Route("/company/new", name="new_company")
+     * @Route("/show/{id}", name="show_company")
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function show(Request $request)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $company = $entityManager->getRepository(Company::class)->find($request->get('id'));
+
+        if (!$company) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('company/show.html.twig', [
+            'company' => $company,
+        ]);
+    }
+
+
+    /**
+     * @param Request $request
+     * @Route("/new", name="new_company")
      * @return RedirectResponse|Response
      */
     public function new(Request $request)
@@ -44,7 +68,7 @@ class CompanyController extends AbstractController
 
     /**
      * @param Request $request
-     * @Route("/company/edit/{id}", name="edit_company")
+     * @Route("/edit/{id}", name="edit_company")
      * @return RedirectResponse|Response
      */
     public function edit(Request $request)
@@ -68,20 +92,21 @@ class CompanyController extends AbstractController
 
         return $this->render('company/edit.html.twig', [
             'form' => $form->createView(),
+            'company' => $company,
         ]);
     }
 
     /**
      * @param Request $request
-     * @Route("/company/delete/{id}", name="delete_company")
+     * @Route("/delete/{id}", name="delete_company")
      * @return RedirectResponse
      */
     public function delete(Request $request)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $document = $entityManager->getRepository(Company::class)->find($request->get('id'));
+        $company = $entityManager->getRepository(Company::class)->find($request->get('id'));
 
-        $entityManager->remove($document);
+        $entityManager->remove($company);
         $entityManager->flush();
 
         return $this->redirectToRoute('companies');
@@ -89,7 +114,7 @@ class CompanyController extends AbstractController
 
     /**
      * @param Request $request
-     * @Route("/company/list", name="companies")
+     * @Route("/list", name="companies")
      * @return Response
      */
     public function list(Request $request)
