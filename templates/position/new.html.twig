@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ document.categoryText }} {{ document.number }} - edycja - {{ parent() }}{% endblock %}
+{% block title %}Nowa pozycja - {{ parent() }}{% endblock %}
 
 {% form_theme form _self %}
 
@@ -32,12 +32,7 @@
 {% block head %}
     <nav>
         <div class="lefty">
-            <a href="{{ url('documents') }}"><i class="material-icons">arrow_back</i></a>
-        </div>
-        <div class="righty">
-            <a href="{{ path('show_document', {'id': document.id}) }}"><i class="material-icons">visibility</i></a>
-            <a href="{{ path('positions', {'document_id': document.id}) }}"><i class="material-icons">list_alt</i></a>
-            <a data-confirm="true" href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
+            <a href="{{ url('positions', {'document_id': document.id}) }}"><i class="material-icons">arrow_back</i></a>
         </div>
     </nav>
 {% endblock %}

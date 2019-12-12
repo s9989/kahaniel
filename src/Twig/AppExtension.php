@@ -11,10 +11,21 @@ class AppExtension extends AbstractExtension
     {
         return array(
             new TwigFilter('price', array($this, 'priceFilter')),
+            new TwigFilter('percent', array($this, 'percentFilter')),
             new TwigFilter('bank', array($this, 'bankFilter')),
             new TwigFilter('account_number', array($this, 'accountNumberFilter')),
             new TwigFilter('literal', array($this, 'literalFilter')),
         );
+    }
+
+    /**
+     * @param $number
+     *
+     * @return string
+     */
+    public function percentFilter($number): string
+    {
+        return sprintf('%s %%', $number);
     }
 
     /**

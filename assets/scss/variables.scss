@@ -3,3 +3,9 @@ $break-small: 400px;
 $break-medium: 700px;
 $break-footer: 1000px;
 $break-large: 1200px;
+
+@media screen and (max-width: $break-medium) {
+  .hide-medium {
+    display: none;
+  }
+}

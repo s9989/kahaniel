@@ -16,6 +16,18 @@ class Position
 {
     use SoftDeleteable;
 
+    const SERVICE_UNIT = 1;
+    const ITEM_UNIT = 2;
+    const KILOGRAM_UNIT = 3;
+    const LITER_UNIT = 4;
+
+    const UNIT_TEXT = [
+        self::SERVICE_UNIT =>'Usługa',
+        self::ITEM_UNIT =>'Sztuka',
+        self::KILOGRAM_UNIT =>'Kilogram',
+        self::LITER_UNIT =>'Litr',
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -50,8 +62,8 @@ class Position
     private $title;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
-     * @var integer
+     * @ORM\Column(type="string", nullable=false)
+     * @var string
      */
     private $category;
 
@@ -100,7 +112,7 @@ class Position
     /**
      * @return int
      */
-    public function getPosition(): int
+    public function getPosition(): ?int
     {
         return $this->position;
     }
@@ -116,7 +128,7 @@ class Position
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -130,17 +142,17 @@ class Position
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getCategory(): int
+    public function getCategory(): ?string
     {
         return $this->category;
     }
 
     /**
-     * @param int $category
+     * @param string $category
      */
-    public function setCategory(int $category): void
+    public function setCategory(string $category): void
     {
         $this->category = $category;
     }
@@ -148,9 +160,21 @@ class Position
     /**
      * @return int
      */
-    public function getUnit(): int
+    public function getUnit(): ?int
     {
         return $this->unit;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnitText(): string
+    {
+        if (!array_key_exists($this->getUnit(), self::UNIT_TEXT)) {
+            return '';
+        }
+
+        return self::UNIT_TEXT[$this->getUnit()];
     }
 
     /**
@@ -164,7 +188,7 @@ class Position
     /**
      * @return int
      */
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -180,7 +204,7 @@ class Position
     /**
      * @return int
      */
-    public function getNet(): int
+    public function getNet(): ?int
     {
         return $this->net;
     }
@@ -196,7 +220,7 @@ class Position
     /**
      * @return int
      */
-    public function getTaxPercent(): int
+    public function getTaxPercent(): ?int
     {
         return $this->taxPercent;
     }
@@ -210,9 +234,33 @@ class Position
     }
 
     /**
+     * @return int
+     */
+    public function getNetTotal(): int
+    {
+        return $this->getNet() * $this->getAmount();
+    }
+
+    /**
+     * @return int
+     */
+    public function getTaxTotal(): int
+    {
+        return round($this->getNetTotal() * $this->getTaxPercent() / 100);
+    }
+
+    /**
+     * @return int
+     */
+    public function getGrossTotal(): int
+    {
+        return $this->getNetTotal() + $this->getTaxTotal();
+    }
+
+    /**
      * @return Document
      */
-    public function getDocument(): Document
+    public function getDocument(): ?Document
     {
         return $this->document;
     }

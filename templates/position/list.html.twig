@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pozycje dokumentu {{ document.number }}{% endblock %}
+
+{% block head %}
+
+    <nav>
+        <div class="lefty">
+            <h2>Pozycje w dokumencie {{ document.categoryText }} {{ document.number }}</h2>
+        </div>
+        <div class="righty">
+            <a href="{{ url('show_document', {'id': document.id}) }}"><i class="material-icons">visibility</i></a>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <section>
+    {% for position in positions %}
+        <div class="anchor">
+            <a class="heading wide" href="{{ path('show_position', {'id': position.id}) }}">{{ position.title }}</a>
+            <div class="main_bar">
+                <div class="value hide-medium">{{ position.net|price }}</div>
+                <div class="value hide-medium">{{ position.amount }}</div>
+                <div class="value">{{ position.netTotal|price }}</div>
+                <div class="value hide-medium">{{ position.taxPercent|percent }}</div>
+                <div class="value">{{ position.taxTotal|price }}</div>
+                <div class="value">{{ position.grossTotal|price }}</div>
+            </div>
+            <div class="menu">
+                <a href="{{ path('edit_position', {'id': position.id}) }}"><i class="material-icons">edit</i></a>
+                <a data-confirm="true" href="{{ path('delete_position', {'id': position.id}) }}"><i class="material-icons">delete</i></a>
+            </div>
+        </div>
+    {% else %}
+        <div class="empty">Brak pozycji</div>
+    {% endfor %}
+    </section>
+{% endblock %}
+
+{% block submenu %}
+    <div class="new">
+        <a href="{{ path('new_position', {'document_id': document.id}) }}"><i class="material-icons">add</i></a>
+    </div>
+{% endblock %}

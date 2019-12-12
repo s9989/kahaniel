@@ -527,6 +527,43 @@ class Document
     }
 
     /**
+     * @return int
+     */
+    public function getNetTotal(): int
+    {
+        $total = 0;
+        foreach ($this->getPositions() as $position) {
+            $total += $position->getNetTotal();
+        }
+        return $total;
+    }
+
+    /**
+     * @return int
+     */
+    public function getTaxTotal(): int
+    {
+        $total = 0;
+        foreach ($this->getPositions() as $position) {
+            $total += $position->getTaxTotal();
+        }
+        return $total;
+    }
+
+    /**
+     * @return int
+     */
+    public function getGrossTotal(): int
+    {
+        $total = 0;
+        foreach ($this->getPositions() as $position) {
+            $total += $position->getGrossTotal();
+        }
+        return $total;
+    }
+
+
+    /**
      * @return Collection
      */
     public function getViewers(): Collection

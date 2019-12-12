@@ -9,6 +9,7 @@
         </div>
         <div class="righty">
             <a href="{{ path('edit_document', {'id': document.id}) }}"><i class="material-icons">edit</i></a>
+            <a href="{{ path('positions', {'document_id': document.id}) }}"><i class="material-icons">list_alt</i></a>
             <a data-confirm="true" href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
         </div>
     </nav>
@@ -38,7 +39,47 @@
         </div>
     </div>
     <div class="section positions">
-
+        <table>
+            <thead>
+                <tr>
+                    <th>L.p.</th>
+                    <th>Nazwa towaru lub usługi</th>
+                    <th>PKWiU</th>
+                    <th>Jednostka</th>
+                    <th>Ilość</th>
+                    <th>Cena netto</th>
+                    <th>Stawka VAT</th>
+                    <th>Wartość netto</th>
+                    <th>Wartość VAT</th>
+                    <th>Wartość brutto</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for position in document.positions %}
+                <tr>
+                    <td>{{ position.position }}</td>
+                    <td class="lefty">{{ position.title }}</td>
+                    <td>{{ position.category }}</td>
+                    <td>{{ position.unitText }}</td>
+                    <td>{{ position.amount }}</td>
+                    <td>{{ position.net|price }}</td>
+                    <td>{{ position.taxPercent|percent }}</td>
+                    <td>{{ position.netTotal|price }}</td>
+                    <td>{{ position.taxTotal|price }}</td>
+                    <td>{{ position.grossTotal|price }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="6" class="blank"></td>
+                    <td class="lefty">Razem</td>
+                    <td class="center-align">{{ document.netTotal|price }}</td>
+                    <td class="center-align">{{ document.taxTotal|price }}</td>
+                    <td class="center-align">{{ document.grossTotal|price }}</td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
     <div class="section details">
         <div class="payment_details">

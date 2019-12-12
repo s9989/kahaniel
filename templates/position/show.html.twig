@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ position.title }} - {{ parent() }}{% endblock %}
+
+{% block head %}
+    <nav>
+        <div class="lefty">
+            <a href="{{ url('positions', {'document_id': document.id}) }}"><i class="material-icons">arrow_back</i></a>
+        </div>
+        <div class="righty">
+            <a href="{{ path('edit_position', {'id': position.id}) }}"><i class="material-icons">edit</i></a>
+            <a data-confirm="true" href="{{ path('delete_position', {'id': position.id}) }}"><i class="material-icons">delete</i></a>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+<section>
+    <div class="single_position">
+        <h3>{{ position.position }}</h3>
+        <h1>{{ position.title }}</h1>
+        <div>Kategoria: {{ position.category }}</div>
+        <div>Jednostka: {{ position.unitText }}</div>
+        <div>Ilość: {{ position.amount }}</div>
+        <div>Cena netto: {{ position.net|price }}</div>
+        <div>Podatek: {{ position.taxPercent|percent }}</div>
+        <div>Wartość netto: {{ position.netTotal|price }}</div>
+        <div>Wartość podatku: {{ position.taxTotal|price }}</div>
+        <div>Wartość brutto: {{ position.grossTotal|price }}</div>
+    </div>
+</section>
+{% endblock %}
