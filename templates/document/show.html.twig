@@ -44,11 +44,11 @@
                 <tr>
                     <th>L.p.</th>
                     <th>Nazwa towaru lub usługi</th>
-                    <th>PKWiU</th>
-                    <th>Jednostka</th>
-                    <th>Ilość</th>
-                    <th>Cena netto</th>
-                    <th>Stawka VAT</th>
+                    <th class="hide-medium">PKWiU</th>
+                    <th class="hide-medium">Jednostka</th>
+                    <th class="hide-medium">Ilość</th>
+                    <th class="hide-medium">Cena netto</th>
+                    <th class="hide-medium">Stawka VAT</th>
                     <th>Wartość netto</th>
                     <th>Wartość VAT</th>
                     <th>Wartość brutto</th>
@@ -59,11 +59,11 @@
                 <tr>
                     <td>{{ position.position }}</td>
                     <td class="lefty">{{ position.title }}</td>
-                    <td>{{ position.category }}</td>
-                    <td>{{ position.unitText }}</td>
-                    <td>{{ position.amount }}</td>
-                    <td>{{ position.net|price }}</td>
-                    <td>{{ position.taxPercent|percent }}</td>
+                    <td class="hide-medium">{{ position.category }}</td>
+                    <td class="hide-medium">{{ position.unitText }}</td>
+                    <td class="hide-medium">{{ position.amount }}</td>
+                    <td class="hide-medium">{{ position.net|price }}</td>
+                    <td class="hide-medium">{{ position.taxPercent|percent }}</td>
                     <td>{{ position.netTotal|price }}</td>
                     <td>{{ position.taxTotal|price }}</td>
                     <td>{{ position.grossTotal|price }}</td>
@@ -72,7 +72,8 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6" class="blank"></td>
+                    <td colspan="6" class="blank hide-medium"></td>
+                    <td colspan="2" class="blank show-medium"></td>
                     <td class="lefty">Razem</td>
                     <td class="center-align">{{ document.netTotal|price }}</td>
                     <td class="center-align">{{ document.taxTotal|price }}</td>
