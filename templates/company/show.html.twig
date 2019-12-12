@@ -9,13 +9,20 @@
         </div>
         <div class="righty">
             <a href="{{ path('edit_company', {'id': company.id}) }}"><i class="material-icons">edit</i></a>
-            <a href="{{ path('delete_company', {'id': company.id}) }}"><i class="material-icons">delete</i></a>
+            <a data-confirm="true" href="{{ path('delete_company', {'id': company.id}) }}"><i class="material-icons">delete</i></a>
         </div>
     </nav>
 {% endblock %}
 
 {% block body %}
-<div class="single_company">
-    {{ company.name }}
-</div>
+<section>
+    <div class="single_company">
+        <h3>{{ company.nip }}</h3>
+        <h1>{{ company.name }}</h1>
+        <div class="address1">{{ company.addressLine1 }}</div>
+        <div class="address1">{{ company.addressLine2 }}</div>
+        <div class="phone">Phone: {{ company.phone }}</div>
+        <div class="email">Email: {{ company.email }}</div>
+    </div>
+</section>
 {% endblock %}

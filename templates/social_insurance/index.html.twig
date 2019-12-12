@@ -12,8 +12,10 @@
     {% for payment in payments %}
         <div class="anchor payment element">
             <div class="date">{{ payment.date|localizeddate('none', 'none', app.request.locale, null, 'LLLL, Y')|capitalize }}</div>
-            <div class="title">ZUS</div>
-            <div class="value">{{ payment.total|price }}</div>
+            <div class="main_bar">
+                <div class="title">Płatność ZUS</div>
+                <div class="value">{{ payment.total|price }}</div>
+            </div>
         </div>
     {% endfor %}
     </section>

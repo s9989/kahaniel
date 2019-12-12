@@ -9,7 +9,7 @@
         </div>
         <div class="righty">
             <a href="{{ path('edit_document', {'id': document.id}) }}"><i class="material-icons">edit</i></a>
-            <a href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
+            <a data-confirm="true" href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
         </div>
     </nav>
 {% endblock %}

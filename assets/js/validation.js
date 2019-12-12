@@ -77,7 +77,7 @@ $(document).ready(function() {
 
     $('[data-maxlength]').on('check', function() {
 
-        if ($(this).data('maxlength') < $(this).val().length) {
+        if ($(this).data('maxlength') < $.trim($(this).val()).length) {
             $(this).data('error', true);
 
             let $error = $(this).parent().find('.error');
@@ -89,7 +89,7 @@ $(document).ready(function() {
 
     $('[data-minlength]').on('check', function() {
 
-        if ($(this).data('minlength') > $(this).val().length) {
+        if ($(this).data('minlength') > $.trim($(this).val()).length) {
             $(this).data('error', true);
 
             let $error = $(this).parent().find('.error');
@@ -133,6 +133,10 @@ $(document).ready(function() {
             case 'number':
                 regex = '^\\d*$';
                 message = 'Tylko cyfry';
+                break;
+            case 'username':
+                regex = '^\\w*$';
+                message = 'Tylko male litery';
                 break;
             case 'price':
                 regex = '^\\d+,\\d+$';

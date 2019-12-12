@@ -6,6 +6,10 @@ $(document).ready(function() {
     //     format: 'd.m.yyyy'
     // });
 
+    $('[data-confirm="true"]').on('click', function() {
+        return confirm("Czy na pewno usunąć?");
+    });
+
     $('.menu-icon').on('click', function() {
         $('.content > .wrapper').toggleClass('collapsed');
         $('.menu').toggleClass('expanded');

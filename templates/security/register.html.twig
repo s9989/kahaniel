@@ -1,5 +1,9 @@
 {% extends 'empty.html.twig' %}
 
+{% block javascripts %}
+    {{ encore_entry_script_tags('js/validation') }}
+{% endblock %}
+
 {% block title %}Rejestracja - {{ parent() }}{% endblock %}
 
 {% form_theme form _self %}

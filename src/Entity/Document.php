@@ -16,6 +16,7 @@ class Document
 {
     const PROFIT_TYPE = 1;
     const COST_TYPE = 2;
+    const OTHER_TYPE = 3;
 
     const VAT_INVOICE_CATEGORY_TEXT = 'Faktura VAT';
     const MARGIN_INVOICE_CATEGORY_TEXT = 'Faktura VAT marża';
@@ -187,6 +188,7 @@ class Document
 
     public function __construct()
     {
+        $this->type = self::OTHER_TYPE;
         $this->paymentType = 1;
         $this->issueDate = new \DateTime();
         $this->paymentDate = new \DateTime();
@@ -204,12 +206,10 @@ class Document
 
     /**
      * @param mixed $id
-     * @return Document
      */
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
-        return $this;
     }
 
     /**
@@ -222,12 +222,24 @@ class Document
 
     /**
      * @param int $type
-     * @return Document
      */
-    public function setType(int $type): Document
+    public function setType(int $type): void
     {
         $this->type = $type;
-        return $this;
+    }
+
+    /**
+     * @param Company $company
+     */
+    public function determineType(Company $company): void
+    {
+        if ($company->getId() == $this->getSeller()->getId()) {
+            $this->setType(self::PROFIT_TYPE);
+        }
+
+        if ($company->getId() == $this->getBuyer()->getId()) {
+            $this->setType(self::COST_TYPE);
+        }
     }
 
     /**
@@ -248,12 +260,10 @@ class Document
 
     /**
      * @param int $category
-     * @return Document
      */
-    public function setCategory(int $category): Document
+    public function setCategory(int $category): void
     {
         $this->category = $category;
-        return $this;
     }
 
     /**
@@ -266,12 +276,10 @@ class Document
 
     /**
      * @param string $title
-     * @return Document
      */
-    public function setTitle(string $title): Document
+    public function setTitle(string $title): void
     {
         $this->title = $title;
-        return $this;
     }
 
     /**
@@ -284,12 +292,10 @@ class Document
 
     /**
      * @param string $description
-     * @return Document
      */
-    public function setDescription(string $description = null): Document
+    public function setDescription(string $description = null): void
     {
         $this->description = $description;
-        return $this;
     }
 
     /**
@@ -302,12 +308,10 @@ class Document
 
     /**
      * @param string $number
-     * @return Document
      */
-    public function setNumber(string $number): Document
+    public function setNumber(string $number): void
     {
         $this->number = $number;
-        return $this;
     }
 
     /**
@@ -348,12 +352,10 @@ class Document
 
     /**
      * @param string $accountNumber
-     * @return Document
      */
-    public function setAccountNumber(string $accountNumber): Document
+    public function setAccountNumber(string $accountNumber): void
     {
         $this->accountNumber = $accountNumber;
-        return $this;
     }
 
     /**
@@ -390,12 +392,10 @@ class Document
 
     /**
      * @param Company $buyer
-     * @return Document
      */
-    public function setBuyer(Company $buyer): Document
+    public function setBuyer(Company $buyer): void
     {
         $this->buyer = $buyer;
-        return $this;
     }
 
     /**
@@ -408,12 +408,10 @@ class Document
 
     /**
      * @param Company $seller
-     * @return Document
      */
-    public function setSeller(Company $seller): Document
+    public function setSeller(Company $seller): void
     {
         $this->seller = $seller;
-        return $this;
     }
 
     /**
@@ -426,12 +424,10 @@ class Document
 
     /**
      * @param \DateTime $issueDate
-     * @return Document
      */
-    public function setIssueDate(\DateTime $issueDate): Document
+    public function setIssueDate(\DateTime $issueDate): void
     {
         $this->issueDate = $issueDate;
-        return $this;
     }
 
     /**
@@ -444,12 +440,10 @@ class Document
 
     /**
      * @param \DateTime $paymentDate
-     * @return Document
      */
-    public function setPaymentDate(\DateTime $paymentDate): Document
+    public function setPaymentDate(\DateTime $paymentDate): void
     {
         $this->paymentDate = $paymentDate;
-        return $this;
     }
 
     /**
@@ -462,12 +456,10 @@ class Document
 
     /**
      * @param string $place
-     * @return Document
      */
-    public function setPlace(string $place): Document
+    public function setPlace(string $place): void
     {
         $this->place = $place;
-        return $this;
     }
 
     /**
@@ -480,12 +472,10 @@ class Document
 
     /**
      * @param int $net
-     * @return Document
      */
-    public function setNet(int $net): Document
+    public function setNet(int $net): void
     {
         $this->net = $net;
-        return $this;
     }
 
     /**
@@ -498,12 +488,10 @@ class Document
 
     /**
      * @param int $taxPercent
-     * @return Document
      */
-    public function setTaxPercent(int $taxPercent): Document
+    public function setTaxPercent(int $taxPercent): void
     {
         $this->taxPercent = $taxPercent;
-        return $this;
     }
 
     /**
@@ -516,12 +504,10 @@ class Document
 
     /**
      * @param int $tax
-     * @return Document
      */
-    public function setTax(int $tax): Document
+    public function setTax(int $tax): void
     {
         $this->tax = $tax;
-        return $this;
     }
 
     /**
@@ -534,12 +520,10 @@ class Document
 
     /**
      * @param int $gross
-     * @return Document
      */
-    public function setGross(int $gross): Document
+    public function setGross(int $gross): void
     {
         $this->gross = $gross;
-        return $this;
     }
 
     /**

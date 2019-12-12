@@ -36,6 +36,10 @@ class DocumentController extends AbstractController
             $document = $form->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
+            $company = $entityManager->getRepository(Company::class)->findOneByOwner($this->getUser());
+            $document->determineType($company);
+
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($document);
             $entityManager->flush();
 
@@ -64,6 +68,10 @@ class DocumentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $document = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $company = $entityManager->getRepository(Company::class)->findOneByOwner($this->getUser());
+            $document->determineType($company);
 
             $entityManager->persist($document);
             $entityManager->flush();

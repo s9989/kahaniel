@@ -6,13 +6,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="app_users")
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  */
 class User implements UserInterface, \Serializable
 {
@@ -42,6 +44,7 @@ class User implements UserInterface, \Serializable
      * @var string
      * @ORM\Column(type="string", length=254, unique=true)
      * @Assert\NotBlank
+     * @Assert\Email
      */
     private $email;
 

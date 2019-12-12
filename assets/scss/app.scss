@@ -206,8 +206,13 @@ header + .content {
         font-weight: 300;
         font-size: 14px;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
+
+        @media screen and (max-width: $break-medium) {
+            justify-content: flex-end;
+        }
 
         &:not(:first-child) {
             border-top: solid 1px #ddd;
@@ -229,9 +234,22 @@ header + .content {
             border-left: solid 2px #88b157;
         }
 
-        & > .date {
+        .date {
             padding: 20px;
             color: #999999;
+            @media screen and (max-width: $break-medium) {
+                order: 2;
+                flex-grow: 10;
+            }
+        }
+
+        .title {
+            padding: 20px;
+        }
+
+        .value {
+            padding: 20px;
+            white-space: nowrap;
         }
 
         &.payment {
@@ -243,24 +261,26 @@ header + .content {
                 flex-grow: 100;
                 text-align: left;
             }
-            .value {
-                padding: 20px;
-            }
         }
 
-        & > a {
+        .main_bar {
             flex-grow: 10;
-            padding: 20px;
             display: flex;
             justify-content: space-between;
+            @media screen and (max-width: $break-medium) {
+                order: 1;
+                width: 100%;
+            }
         }
 
         .menu {
             padding: 14px;
+            white-space: nowrap;
+            @media screen and (max-width: $break-medium) {
+                order: 3;
+            }
 
             a {
-                display: block;
-                float: left;
                 margin-left: 10px;
 
                 .material-icons {
@@ -370,6 +390,12 @@ form {
             }
         }
     }
+}
+
+.single_company {
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    font-weight: 300;
 }
 
 .single_document {

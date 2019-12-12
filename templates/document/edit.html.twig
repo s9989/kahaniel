@@ -36,7 +36,7 @@
         </div>
         <div class="righty">
             <a href="{{ path('show_document', {'id': document.id}) }}"><i class="material-icons">visibility</i></a>
-            <a href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
+            <a data-confirm="true" href="{{ path('delete_document', {'id': document.id}) }}"><i class="material-icons">delete</i></a>
         </div>
     </nav>
 {% endblock %}
