@@ -182,7 +182,7 @@ class Document
 
     /**
      * Many Users have Many Documents.
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="documents", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="documents", cascade={"persist"})
      */
     private $viewers;
 

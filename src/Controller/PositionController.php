@@ -68,6 +68,7 @@ class PositionController extends AbstractController
             $entityManager->persist($position);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Dodano nową pozycję');
             return $this->redirectToRoute('positions', ['document_id' => $position->getDocument()->getId() ]);
         }
 
@@ -98,6 +99,7 @@ class PositionController extends AbstractController
             $entityManager->persist($position);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Zapisano zmiany');
             return $this->redirectToRoute('positions', ['document_id' => $position->getDocument()->getId() ]);
         }
 
@@ -123,6 +125,7 @@ class PositionController extends AbstractController
         $entityManager->remove($position);
         $entityManager->flush();
 
+        $this->addFlash('error', 'Usunięto pozycję');
         return $this->redirectToRoute('positions', ['document_id' => $documentId ]);
     }
 

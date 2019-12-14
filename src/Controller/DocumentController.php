@@ -43,6 +43,7 @@ class DocumentController extends AbstractController
             $entityManager->persist($document);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Dodano nowy dokument');
             return $this->redirectToRoute('documents');
         }
 
@@ -76,6 +77,7 @@ class DocumentController extends AbstractController
             $entityManager->persist($document);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Zmiany zostały zapisane');
             return $this->redirectToRoute('documents');
         }
 
@@ -119,6 +121,7 @@ class DocumentController extends AbstractController
         $entityManager->remove($document);
         $entityManager->flush();
 
+        $this->addFlash('error', 'Usunięto dokument');
         return $this->redirectToRoute('documents');
     }
 

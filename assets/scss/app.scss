@@ -51,6 +51,25 @@ header {
 }
 
 .wrapper {
+
+    .flash {
+        margin: 0 20px 10px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 13px;
+        background-color: #ddd;
+        padding: 4px 7px;
+
+        &.flash-success {
+            background-color: #35b74e;
+            color: white;
+        }
+
+        &.flash-error {
+            background-color: #ab0e00;
+            color: white;
+        }
+    }
+
     .head, .belt {
         margin: 0 20px;
 

@@ -73,6 +73,7 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Rejestracja zakończyła się pomyślnie');
             return $this->redirectToRoute('login');
         }
 

@@ -70,7 +70,7 @@ class User implements UserInterface, \Serializable
 
     /**
      * Many Users have Many Documents.
-     * @ORM\ManyToMany(targetEntity="Document", inversedBy="viewers", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Document", mappedBy="viewers", cascade={"persist"})
      */
     private $documents;
 

@@ -58,6 +58,7 @@ class CompanyController extends AbstractController
             $entityManager->persist($company);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Dodano nową firmę');
             return $this->redirectToRoute('companies');
         }
 
@@ -87,6 +88,7 @@ class CompanyController extends AbstractController
             $entityManager->persist($company);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Zapisano zmiany');
             return $this->redirectToRoute('companies');
         }
 
@@ -109,6 +111,7 @@ class CompanyController extends AbstractController
         $entityManager->remove($company);
         $entityManager->flush();
 
+        $this->addFlash('error', 'Usunięto firmę');
         return $this->redirectToRoute('companies');
     }
 

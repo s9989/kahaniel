@@ -58,6 +58,14 @@
                 </ul>
             </div>
             <div class="wrapper">
+                {# read and display all flash messages #}
+                {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                <div class="flash flash-{{ label }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endfor %}
                 <div class="head">{% block head %}{% endblock %}</div>
                 <div class="body">{% block body %}{% endblock %}</div>
             </div>
