@@ -47,7 +47,7 @@ class DocumentType extends AbstractType
             ]])
             ->add('issueDate', DateType::class, [
                 'label' => 'Data wystawienia',
-                'format' => 'd.M.Y',
+                'format' => 'dd.MM.yyyy',
                 'attr' => [
                     'class' => 'js-datepicker',
                     'data-required' => true,
@@ -57,7 +57,7 @@ class DocumentType extends AbstractType
             ])
             ->add('paymentDate', DateType::class, [
                 'label' => 'Data płatności',
-                'format' => 'd.M.Y',
+                'format' => 'dd.MM.yyyy',
                 'attr' => [
                     'class' => 'js-datepicker',
                     'data-required' => true,
