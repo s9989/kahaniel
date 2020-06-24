@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Company;
 use App\Entity\Document;
+use App\Entity\Position;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -46,14 +47,37 @@ class DocumentFixtures extends Fixture implements DependentFixtureInterface
         $document->setIssueDate(new \DateTime());
         $document->setPaymentDate(new \DateTime());
         $document->setPlace('Kraków');
-        $document->setNet(100);
-        $document->setTaxPercent(23);
-        $document->setTax(23);
-        $document->setGross(123);
         $document->setBuyer($manager->getRepository(Company::class)->findOneByNip('1582065178')); // default
         $document->setSeller($manager->getRepository(Company::class)->findOneByNip('1548845014')); // coca cola
         $document->addViewer($manager->getRepository(User::class)->findOneByUsername('partner'));
         $document->addViewer($manager->getRepository(User::class)->findOneByUsername('admin'));
+
+        $position = new Position();
+        $position->setPosition(1);
+        $position->setAmount(6);
+        $position->setCategory("60.3");
+        $position->setNet(1400);
+        $position->setTaxPercent(23);
+        $position->setTitle("Tytuł usługi");
+        $position->setUnit(Position::SERVICE_UNIT);
+        $position->setDocument($document);
+        $document->addPosition($position);
+
+        $position = new Position();
+        $position->setPosition(2);
+        $position->setAmount(4);
+        $position->setCategory("61.3");
+        $position->setNet(1500);
+        $position->setTaxPercent(8);
+        $position->setTitle("Tytuł usługi 2");
+        $position->setUnit(Position::SERVICE_UNIT);
+        $position->setDocument($document);
+        $document->addPosition($position);
+
+        $document->setNet($document->calculateNet());
+        $document->setTaxPercent(23);
+        $document->setTax($document->calculateTax());
+        $document->setGross($document->calculateGross());
 
         $manager->persist($document);
 

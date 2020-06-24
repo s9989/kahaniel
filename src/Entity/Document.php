@@ -108,7 +108,7 @@ class Document
     private $accountNumber;
 
     /**
-     * @ORM\OneToMany(targetEntity="Position", mappedBy="document")
+     * @ORM\OneToMany(targetEntity="Position", mappedBy="document", cascade={"persist"})
      * @var Collection
      */
     private $positions;
@@ -194,6 +194,7 @@ class Document
         $this->paymentDate = new \DateTime();
         $this->description = '';
         $this->viewers = new ArrayCollection();
+        $this->positions = new ArrayCollection();
     }
 
     /**
@@ -478,6 +479,15 @@ class Document
         $this->net = $net;
     }
 
+    public function calculateNet(): int
+    {
+        $net = 0;
+        foreach ($this->getPositions() as $position) {
+            $net += $position->getNet();
+        }
+        return $net;
+    }
+
     /**
      * @return int
      */
@@ -510,6 +520,15 @@ class Document
         $this->tax = $tax;
     }
 
+    public function calculateTax(): int
+    {
+        $tax = 0;
+        foreach ($this->getPositions() as $position) {
+            $tax += $position->getTaxTotal();
+        }
+        return $tax;
+    }
+
     /**
      * @return int
      */
@@ -524,6 +543,15 @@ class Document
     public function setGross(int $gross): void
     {
         $this->gross = $gross;
+    }
+
+    public function calculateGross(): int
+    {
+        $gross = 0;
+        foreach ($this->getPositions() as $position) {
+            $gross += $position->getGrossTotal();
+        }
+        return $gross;
     }
 
     /**
